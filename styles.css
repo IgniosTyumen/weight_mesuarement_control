@@ -1,0 +1,120 @@
+
+.mainControlPanel{
+    z-index: 1800;
+    position: absolute;
+    width: 630px;
+    height: fit-content;
+    max-height: 100vh;
+    top:0;
+
+}
+
+.openedMainControlPanel{
+    animation-duration: 0.75s;
+    animation-name: sliderFromRightMain;
+    left: 0;
+}
+
+.mainControlButtonDefault{
+    position: absolute;
+    right: -45px;
+
+    cursor: pointer;
+    background: rgba(255, 255, 255, .85);
+    padding: 8px 0;
+    border-radius: 0 4px 4px 0;
+    text-align: center;
+    box-shadow: 0 1px 3px 0 rgba(38, 38, 38, 0.5);
+    color: #262626;
+}
+
+.mainControlButtonSwitch{
+    position: absolute;
+    right: -45px;
+    top:63px;
+
+    cursor: pointer;
+    background: rgba(255, 255, 255, .85);
+    padding: 8px 0;
+    border-radius: 0 4px 4px 0;
+    text-align: center;
+    box-shadow: 0 1px 3px 0 rgba(38, 38, 38, 0.5);
+    color: #262626;
+
+}
+
+.closedMainControlPanel{
+    animation-duration: 0.75s;
+    animation-name: sliderOutFromRightMain;
+    left: -630px;
+}
+
+
+@keyframes sliderFromRightMain {
+    from {
+        left: -630px;
+    }
+    to {
+        left: 0px;
+    }
+}
+@keyframes sliderOutFromRightMain {
+    from {
+        left: 0px;
+    }
+    to {
+        left: -630px;
+    }
+}
+
+.panelSummaryDecorator{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.panelSummaryDecoratorText{
+    transform: translateY(25%);
+}
+
+.MuiCollapse-wrapperInner{
+    background-color: #929292;
+    padding: 0 !important;
+}
+
+.mainControlsWrapper{
+    overflow-y: auto;
+    overflow-scrolling: touch;
+    max-height: 100vh;
+}
+
+.Mui-expanded{
+    margin: 0 !important;
+}
+
+.shortStatisticText{
+    padding: 5px;
+}
+
+.initClosedPanel{
+    left:-630px
+}
+
+.MuiSelect-select{
+    overflow: auto !important;
+    max-height: 53px;
+    background-color: white;
+}
+
+.optionStyleDefault{
+    padding-left: 15px;
+}
+
+.MuiExpansionPanelDetails-root {
+    padding: 10px !important;
+}
+
+.tableTrucksControlWrapper{
+    width: 100%;
+}

@@ -1,0 +1,32 @@
+{
+    "presets": [
+        [
+            "env",
+            {
+                "targets": {
+                    "browsers": [
+                        ">0.25%",
+                        "not ie 11",
+                        "not op_mini all"
+                    ]
+                },
+                "uglify": false,
+                "modules":false
+            }
+        ],
+        "react",
+        "es2015",
+        "stage-0"
+    ],
+    "plugins": [
+        "transform-object-rest-spread",
+        "transform-class-properties",
+        "react-hot-loader/babel",
+        [
+            "babel-plugin-root-import",
+            {
+                "rootPathSuffix": "src"
+            }
+        ]
+    ]
+}

@@ -1,0 +1,2 @@
+export const SET_CENTER = 'SET_CENTER';
+export const GEOMETRY_WIGHT = 'GEOMETRY_WIGHT';
