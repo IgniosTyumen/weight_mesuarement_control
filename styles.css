@@ -1,8 +1,9 @@
+@import 'node_modules/antd/dist/antd.css';
 
 .mainControlPanel{
     z-index: 1800;
     position: absolute;
-    width: 630px;
+    width: 506px;
     height: fit-content;
     max-height: 100vh;
     top:0;
@@ -18,10 +19,8 @@
 .mainControlButtonDefault{
     position: absolute;
     right: -45px;
-
     cursor: pointer;
     background: rgba(255, 255, 255, .85);
-    padding: 8px 0;
     border-radius: 0 4px 4px 0;
     text-align: center;
     box-shadow: 0 1px 3px 0 rgba(38, 38, 38, 0.5);
@@ -31,11 +30,9 @@
 .mainControlButtonSwitch{
     position: absolute;
     right: -45px;
-    top:63px;
-
+    top:57px;
     cursor: pointer;
     background: rgba(255, 255, 255, .85);
-    padding: 8px 0;
     border-radius: 0 4px 4px 0;
     text-align: center;
     box-shadow: 0 1px 3px 0 rgba(38, 38, 38, 0.5);
@@ -46,13 +43,13 @@
 .closedMainControlPanel{
     animation-duration: 0.75s;
     animation-name: sliderOutFromRightMain;
-    left: -630px;
+    left: -506px;
 }
 
 
 @keyframes sliderFromRightMain {
     from {
-        left: -630px;
+        left: -506px;
     }
     to {
         left: 0px;
@@ -63,7 +60,7 @@
         left: 0px;
     }
     to {
-        left: -630px;
+        left: -506px;
     }
 }
 
@@ -79,7 +76,7 @@
 }
 
 .MuiCollapse-wrapperInner{
-    background-color: #929292;
+
     padding: 0 !important;
 }
 
@@ -98,7 +95,7 @@
 }
 
 .initClosedPanel{
-    left:-630px
+    left:-506px
 }
 
 .MuiSelect-select{
@@ -117,4 +114,389 @@
 
 .tableTrucksControlWrapper{
     width: 100%;
+}
+
+
+.preloader{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1500;
+    background-color: rgba(200,200,200,0.75);
+}
+
+@keyframes opacityGoOut {
+    0% {
+        opacity: 0.75;
+        z-index: 1500;
+    }
+    100% {
+        opacity: 0;
+        z-index: -1;
+    }
+}
+
+.animatePreloadOut{
+    animation: 2s linear 1s opacityGoOut;
+    opacity: 0;
+    z-index: -1;
+}
+
+.closedPreloader{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(200,200,200,0.0);
+}
+
+.logoITS{
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.loaderStyle{
+    width: 65%;
+    margin: 0 auto;
+}
+
+@keyframes opacityGoOutLoaderBlock {
+    0% {
+        opacity: 1;
+    }
+    99.99% {
+        opacity: 0;
+
+    }
+    100% {
+        z-index: -500;
+    }
+}
+
+.hideLoaderAnimation{
+    animation-duration: 1.75s;
+    animation-name: opacityGoOutLoaderBlock;
+    opacity: 0;
+}
+
+.hideLoader{
+    display: none;
+}
+
+.ripple {
+    background-position: center;
+    transition: background 0.8s;
+}
+.ripple:hover {
+    background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
+}
+.ripple:active {
+    background-color: #6eb9f7;
+    background-size: 100%;
+    transition: background 0s;
+}
+
+
+.rippleButton {
+    border: none;
+    border-radius: 100%;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: white;
+    cursor: pointer;
+    background-color: #e6e6e6;
+    box-shadow: 0 0 4px #999;
+    outline: none;
+    width: fit-content;
+    height: fit-content;
+    padding: 11px;
+}
+.groupButtonBox {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+    background-color: white;
+    z-index: 1500;
+    box-shadow: 0 1px 3px 0 rgba(38, 38, 38, 0.5);
+    flex-wrap: wrap;
+}
+
+.mainGroupWindow.opened {
+    position: relative;
+    height: 77vh;
+    z-index: 1400;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom-right-radius: 15px;
+    box-shadow: 0 1px 3px 0 rgba(38, 38, 38, 0.5);
+    overflow-y: auto;
+    max-height: 77vh;
+    overflow-x: hidden;
+}
+
+.mainGroupWindow.closed {
+    width: 506px;
+    height: fit-content;
+    z-index: 1400;
+    /*top: -506px;*/
+    transform: rotateX(-90deg);
+    transition: transform 0.3s linear;
+
+}
+
+.activateMainGroupWindowAnimation{
+    transform: rotateX(0deg);
+}
+
+.searchField {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+    margin: 5px auto;
+}
+
+.searchFieldDivider {
+    height: 45px !important;
+    width: 2px !important;
+}
+
+.searchFieldInput {
+    flex: 1;
+    padding-left: 5px;
+}
+
+.MuiExpansionPanel-root{
+    width: 100% !important;
+}
+
+.tag{
+    padding: 5px;
+    border-radius: 15px;
+    margin: 5px;
+    background-color: cornflowerblue;
+    width: fit-content;
+}
+
+.tagDeleteButton{
+    background-color: darkslateblue;
+    border-radius: 14px;
+    margin-left: 10px;
+    color: white;
+}
+
+.tagCloud{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin: 10px;
+}
+
+.mainGroupPanel {
+    width: 484px;
+}
+
+.detailsObjectPanel {
+    background-color: white;
+    z-index: 1600;
+    width: 300px;
+    height: 89vh;
+    position: absolute;
+    top: 103px;
+    left: 506px;
+    padding: 5px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    box-shadow: 0 1px 3px 0 rgba(38, 38, 38, 0.5);
+}
+
+.mainGroupPanelTitle{
+    text-align: center;
+}
+
+.MuiTableRow-root:hover{
+    /*background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;*/
+    background-color: #6eb9f7;
+    background-size: 100%;
+    transition: background 0s;
+}
+
+.preloaderTitle{
+    margin-top: 135px;
+    text-align: center;
+    font-size: 24px;
+    font-family: 'Roboto';
+}
+
+.ReactVirtualized__Table__headerRow{
+    display: flex;
+}
+
+.ReactVirtualized__Table__row{
+    display: flex;
+    border: 1px solid gray;
+}
+
+.ReactVirtualized__Table__headerColumn{
+    text-align: center;
+}
+
+.ReactVirtualized__Table__rowColumn{
+    text-align: left;
+    padding: 5px;
+    padding-left: 20px;
+    user-select: none;
+}
+
+
+.ReactVirtualized__Table__row:hover{
+    /*background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;*/
+    background-color: #6eb9f7;
+    background-size: 100%;
+    transition: background 0s;
+}
+
+.roadStripped {
+    color: red;
+}
+
+.signGroup{
+    display: flex;
+    height: fit-content;
+    width: fit-content;
+    border: 1px solid black;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.leaflet-div-icon{
+    border: none !important;
+    background-color: transparent !important;
+}
+
+.closeDetailedObjectPanelButton {
+    position: absolute !important;
+    top: 5px;
+    right: 5px;
+    border-radius: 20px !important;
+}
+
+.detailedObjectPanelButtonGroup {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.roadColorSelector {
+    width: 50%;
+    margin-left: 50px;
+}
+
+
+.roadColorSelectorWrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.settingsBlock {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.orderMainPanelContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.startPointIcon{
+
+    transform: rotate(45deg);
+    background-color: green;
+    border: 1px solid black;
+}
+
+.endPointIcon{
+
+    transform: rotate(45deg);
+    background-color: darkred;
+    border: 1px solid black;
+}
+
+.middlePointIcon{
+
+    transform: rotate(45deg);
+    background-color: #ffe58f;
+    border: 1px solid black;
+}
+
+.pseudoPointIcon{
+
+    background-color: rgba(245,245,245,0.4);
+    border: 1px solid black;
+}
+
+.drawPanel{
+    position: absolute;
+    top: 15px;
+    width: 238px;
+    height: 42px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1500;
+    border-radius: 25px;
+}
+
+.editMode{
+    background-color: #8cc8ff;
+}
+.pullMode {
+    background-color: #8cc8ff;
+}
+
+.drawPanelMessageBox{
+    position: absolute;
+    top: 40px;
+    width: auto;
+    height: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1500;
+    border-radius: 25px;
+}
+
+.ant-select-dropdown{
+    z-index: 2000 !important;
+}
+
+.orderMainPanelContainerText{
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.orderMainPanelContainerButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #e6e6e6;
+    box-shadow: 0 0 4px #999;
+    outline: none;
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 20px;
+    height: 43px;
+}
+
+.ant-tooltip {
+    z-index: 2000;
 }

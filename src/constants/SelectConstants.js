@@ -1,0 +1,3 @@
+export const SELECT_ROAD = 'SELECT_ROAD';
+export const SELECT_BRIDGE = 'SELECT_BRIDGE';
+export const SELECT_DANGER_ROAD = 'SELECT_DANGER_ROAD';

@@ -1,31 +1,66 @@
-import React, {useEffect} from 'react';
-import { connect } from 'react-redux';
+import React, {Fragment, useEffect} from 'react';
+import {connect} from 'react-redux';
 import Map from "~/components/Map";
 import MainControlPanelContainer from "../MainControlPanel/MainControlPanelContainer";
 import * as AppActions from "~/actions/AppActions";
-import {bindActionCreators} from "redux";
+import {bindActionCreators, compose} from "redux";
+import PreloaderContainer from "../Preloader/PreloaderContainer";
+import {Provider} from 'react-redux';
+import {HashRouter, Route, withRouter} from "react-router-dom";
+import {store} from "~/store/configureStore";
+import DrawPanelContainer from "../DrawPanel/DrawPanelContainer";
 
-const Fragment = React.Fragment;
-
-const App = ({appActions}) =>  {
-    useEffect(()=> appActions.initApp(),[]);
+const App = ({appActions, isInitialized,...props}) => {
+    useEffect(() => appActions.initApp(props), []);
     return (
-      <Fragment>
-
-        <Map style={{overflow:'hidden'}}/>
-        <MainControlPanelContainer/>
-
-      </Fragment>
+        <Fragment>
+            <Route path='/:documentId'
+                   render={() => {
+                       return (
+                           <Fragment>
+                               {<PreloaderContainer/>}
+                               {
+                                   isInitialized
+                                   && <MainControlPanelContainer/>
+                               }
+                               {
+                                   isInitialized
+                                   && <DrawPanelContainer/>
+                               }
+                               <Map style={{overflow: 'hidden'}}/>
+                           </Fragment>
+                       )
+                   }
+                   }
+            />
+        </Fragment>
     );
 }
 
-const mapStateToProps = state => ({
-
-});
+const mapStateToProps = state => {
+    return {
+        isInitialized: state.initial.isInitialized
+    }
+};
 const mapDispatchToProps = dispatch => {
     return {
-       appActions : bindActionCreators(AppActions, dispatch),
+        appActions: bindActionCreators(AppActions, dispatch),
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+let AppContainer = compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps))(App)
+
+
+const AppEntryPoint = () => {
+    return (
+        <HashRouter>
+            <Provider store={store}>
+                <AppContainer/>
+            </Provider>
+        </HashRouter>
+    )
+}
+
+export default AppEntryPoint;

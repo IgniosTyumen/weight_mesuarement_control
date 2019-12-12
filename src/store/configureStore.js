@@ -7,7 +7,7 @@ import rootSaga from "../sagas/rootSaga";
 
 
 
-export default function configureStore(initialState) {
+function configureStore(initialState) {
 
   const sageMiddleware = createSagaMiddleware();
   const store =  createStore(
@@ -20,3 +20,5 @@ export default function configureStore(initialState) {
 
   return store;
 }
+
+export const store = configureStore();

@@ -3,11 +3,55 @@ import IconButton from "@material-ui/core/IconButton";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import CloseIcon from '@material-ui/icons/Close';
-import Paper from "@material-ui/core/Paper";
+import GroupButtonBoxContainer from "../GroupButtonsBox/GroupButtonBoxContainer";
+import LayersPanelContainer from "../LayersPanel/LayersPanelContainer";
+import BridgesPanelContainer from "../BridgesPanel/BridgesPanelContainer";
+import DetailsObjectPanelContainer from "../DetailsObjectPanel/DetailsObjectPanelContainer";
+import RoadControlPanelContainer from "../RoadControlPanel/RoadControlPanelContainer";
+import {bridgesApi, dangersApi, roadsApi} from "../../api/api";
+import DangerRoadsPanelContainer from "../DangerRoadsPanel/DangerRoadsPanelContainer";
+import OrderControlPanelContainer from "../OrderControlPanel/OrderControlPanelContainer";
 
 const MainControlPanel = (props) => {
     const [openedPanel, setOpenedPanel] = useState('initClosedPanel');
+    const [mainGroupWindow, setMainGroupWindow] = useState('');
+    const [detailedObject, setDetailedObject] = useState();
+    const [detailedObjectType, setDetailedObjectType] = useState();
+    const [detailedObjectFetching, setDetailedObjectFetching] = useState(false);
 
+
+    const handleSelectDetailedObject = async (obj, type) => {
+        let detailedObject = null;
+        if (type) {
+            switch (type) {
+                case 'road': {
+                    setDetailedObjectFetching(true);
+                    detailedObject = await roadsApi.getRoadInfoById(obj.id);
+                    setDetailedObjectFetching(false);
+                    break;
+                }
+                case 'bridge': {
+                    setDetailedObjectFetching(true);
+                    detailedObject = await bridgesApi.getBridgeInfoById(obj.id);
+                    setDetailedObjectFetching(false);
+                    break;
+                }
+                case 'dangerRoad': {
+                    setDetailedObjectFetching(true);
+                    detailedObject = await dangersApi.getDangerRoadInfoById(obj.id);
+                    setDetailedObjectFetching(false);
+                    break;
+                }
+            }
+
+        }
+        setDetailedObject(detailedObject);
+        setDetailedObjectType(type);
+    };
+
+    const handleSetMainGroupWindow = (value) => {
+        setMainGroupWindow(value)
+    };
 
     const handleOpeningPanel = (event) => {
         event.stopPropagation();
@@ -19,12 +63,20 @@ const MainControlPanel = (props) => {
     const handleClosePanel = (event) => {
         event.stopPropagation();
         setOpenedPanel('closedMainControlPanel');
+        setDetailedObject(null);
+        setDetailedObjectType(null);
     };
 
+    const handleClearMainWindow = (event)=> {
+        event.stopPropagation();
+        setMainGroupWindow('');
+        setDetailedObject(null);
+        setDetailedObjectType(null);
+    };
 
     return (
         <div className={`mainControlPanel ${openedPanel}`}>
-            {openedPanel === 'openedMainControlPanel' && <div className={"mainControlButtonDefault"}>
+            {openedPanel === 'openedMainControlPanel' && <div className={"mainControlButtonDefault"} onClick={handleClearMainWindow}>
                 <IconButton>
                     <CloseIcon/>
                 </IconButton>
@@ -42,13 +94,25 @@ const MainControlPanel = (props) => {
                     <ChevronLeftIcon/>
                 </IconButton>
             </div>}
+
             {
-                <div>
-                    <Paper>
-                        <h1>text</h1>
-                    </Paper>
+                <GroupButtonBoxContainer handleSetMainGroupWindow={handleSetMainGroupWindow} handleSelectDetailedObject={handleSelectDetailedObject}/>
+            }
+
+            {
+                <div className={`mainGroupWindow ${mainGroupWindow ? 'activateMainGroupWindowAnimation opened' : 'closed'}`}>
+                    {mainGroupWindow==='layers' && <LayersPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
+                    {mainGroupWindow==='bridges' && <BridgesPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
+                    {mainGroupWindow==='roads' && <RoadControlPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
+                    {mainGroupWindow==='dangers' && <DangerRoadsPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
+                    {mainGroupWindow==='order' && <OrderControlPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
                 </div>
-                }
+            }
+
+            {
+                detailedObject && <DetailsObjectPanelContainer detailedObject={detailedObject} detailedObjectType={detailedObjectType} handleSelectDetailedObject={handleSelectDetailedObject} fetching={detailedObjectFetching}/>
+            }
+
         </div>
     )
 };
