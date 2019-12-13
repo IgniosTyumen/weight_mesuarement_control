@@ -1,6 +1,5 @@
 import React, {Fragment} from "react";
-import {Map as LeafletMap, Polyline} from "react-leaflet";
-import RoadPopupContainer from "../RoadPopup/RoadPopupContainer";
+import {Polyline} from "react-leaflet";
 
 const DangerRoadsLayer = (props) => {
     const {dangerRoads, userPreferences} = props;
@@ -21,13 +20,11 @@ const DangerRoadsLayer = (props) => {
                     <Fragment>
                     <Polyline positions={points} key={position} color={userPreferences.dangerRoadsColor1} weight={userPreferences.dangerRoadsWidth}
                               onContextMenu={(event) => {
-                                  event.preventDefault()
                               }}>
 
                     </Polyline>
                     <Polyline positions={points} key={position} dashArray={[`${userPreferences.dangerRoadsStrokeLength}`,`${userPreferences.dangerRoadsStrokeLength}`]} dashOffset={`${userPreferences.dangerRoadsStrokeLength}`} color={userPreferences.dangerRoadsColor2}  weight={userPreferences.dangerRoadsWidth}
                               onContextMenu={(event) => {
-                                  event.preventDefault()
                               }}>
 
                     </Polyline>

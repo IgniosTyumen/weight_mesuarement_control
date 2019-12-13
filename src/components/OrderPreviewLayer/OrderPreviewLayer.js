@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import {CircleMarker, Map as LeafletMap, Polyline} from "react-leaflet";
+import {CircleMarker, Polyline} from "react-leaflet";
 
 const OrderPreviewLayer = (props) => {
     const {previewOrder,userPreferences} = props;
@@ -29,17 +29,14 @@ const OrderPreviewLayer = (props) => {
                         <Fragment>
                             <CircleMarker center={points[0]} radius={userPreferences.endpointRouteWidth} color={color}
                                           onContextMenu={(event) => {
-                                              event.preventDefault()
                                           }}/>
                             <CircleMarker center={points[points.length - 1]} radius={userPreferences.endpointRouteWidth}
                                           color={color}
                                           onContextMenu={(event) => {
-                                              event.preventDefault()
                                           }}/>
                         </Fragment>}
                         <Polyline color={color} positions={points}
                                   onContextMenu={(event) => {
-                                      event.preventDefault()
                                   }}/>
                     </Fragment>
                 )

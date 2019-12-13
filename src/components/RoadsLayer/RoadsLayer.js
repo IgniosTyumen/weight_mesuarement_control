@@ -1,8 +1,6 @@
 import React, {Fragment} from "react";
-import {CircleMarker, Map as LeafletMap, Polyline, Popup} from "react-leaflet";
+import {CircleMarker, Polyline} from "react-leaflet";
 import RoadPopupContainer from "../RoadPopup/RoadPopupContainer";
-import invertColor from "../../utils/invertColor";
-import {bridgesApi, dangersApi, roadsApi} from "../../api/api";
 
 const RoadsLayer = (props) => {
 
@@ -27,7 +25,6 @@ const RoadsLayer = (props) => {
                                   weight={userPreferences.roadWidth}
                                   onClick={() => selectedObjectActions.selectRoad(road)}
                                   onContextMenu={(event) => {
-                                      event.preventDefault()
                                   }}
                         >
                             <RoadPopupContainer road={road}/>
@@ -36,12 +33,10 @@ const RoadsLayer = (props) => {
                         <Fragment>
                             <CircleMarker center={points[0]} radius={userPreferences.roadEndpointsWidth} color={userPreferences.roadColor}
                                           onContextMenu={(event) => {
-                                              event.preventDefault()
                                           }}/>
                             < CircleMarker center={points[points.length - 1]} radius={userPreferences.roadEndpointsWidth}
                                            color={userPreferences.roadColor}
                                            onContextMenu={(event) => {
-                                               event.preventDefault()
                                            }}/>
                         </Fragment>
                         }

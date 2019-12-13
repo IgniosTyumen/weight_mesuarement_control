@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import {Map as LeafletMap, Marker, Popup} from "react-leaflet";
+import {Marker} from "react-leaflet";
 import {provideSVGSign} from "~/utils/SignsSVGCollection"
 
 const SignsLayer = (props) => {
@@ -55,7 +55,6 @@ const SignsLayer = (props) => {
                         return (
                             <Marker position={points} icon={divGroup}
                                     onContextMenu={(event) => {
-                                event.preventDefault()
                             }}>
 
                             </Marker>

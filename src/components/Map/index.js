@@ -1,10 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as mapActions from "~/actions/MapActions";
 import * as waypointActions from "~/actions/WaypointActions";
 import * as appActions from "~/actions/AppActions";
-import {LayersControl, Map as LeafletMap, MapLayer, TileLayer, withLeaflet} from 'react-leaflet';
+import {LayersControl, Map as LeafletMap, TileLayer, withLeaflet} from 'react-leaflet';
 import RoadsLayerContainer from "../RoadsLayer/RoadsLayerContainer";
 import BridgesLayerContainer from "../BridgesLayer/BridgesLayerContainer";
 import SignsLayerContainer from "../SignsLayer/SignsLayerContainer";
@@ -54,8 +54,9 @@ class Map extends React.Component {
                 onViewportChanged={this.handleViewportChange.bind(this)}
                 disableDoubleClickZoom={true}
                 onContextMenu={(event) => {
-                    event.preventDefault()
+
                     this.addNewTemplateMarkers(event)
+                    event.stopPropagation()
                 }}
 
             >

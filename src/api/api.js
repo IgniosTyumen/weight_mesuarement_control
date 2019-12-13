@@ -1,5 +1,14 @@
 import {axiosInstance} from "~/utils/axiosInstance";
+import axios from 'axios';
 
+
+const getSCRF = async () =>
+{
+    const response = await axios.get('https://av.admtyumen.ru/get_csrf',{
+        withCredentials: true
+    })
+    return response.data.csrf_token
+}
 
 export const roadsApi = {
     getAllRoads (){
@@ -14,9 +23,6 @@ export const roadsApi = {
     },
     getAllSigns (page){
         return axiosInstance.get('/directory/roadsigns',{
-            headers: {
-                'x-csrf-token': '1574682339.71##977b01732dbbece459c6fcc609d685e9dc0f20ae'
-            },
             params: {
                 page:page
             }
@@ -121,8 +127,9 @@ export const documentsApi = {
     getDocumentData(id){
         return axiosInstance.get(`/iopw/statement_route?statement_id=${id}`)
     },
-    updateWaypoint(waypoint,waypointId,documentId,waypointLength,auth){
-        return axiosInstance.put(`/iopw/statement_route/${waypointId}`,
+    async updateWaypoint(waypoint,waypointId,documentId,waypointLength,auth){
+        const csrf = await getSCRF();
+        return axios.put(`https://av.admtyumen.ru/api/iopw/statement_route/${waypointId}`,
             {
                 "path": waypoint.geometry.points,
                 "statement_id": documentId,
@@ -132,11 +139,16 @@ export const documentsApi = {
                 "importance":  waypoint.importance,
                 "road_length": waypointLength,
                 "save_as_template" : "False"
+            },
+            {
+                headers: {
+                    'x-csrf-token': csrf
+                }
             })
     },
-    createWaypoint(waypoint,waypointId,documentId,waypointLength,auth){
-        debugger
-        return axiosInstance.post('/iopw/statement_route',
+    async createWaypoint(waypoint,waypointId,documentId,waypointLength,auth){
+        const csrf = await getSCRF();
+        return axios.post(`https://av.admtyumen.ru/api/iopw/statement_route`,
             {
                 "path": waypoint.templateWaypoint.geometry.points,
                 "statement_id": documentId,
@@ -147,6 +159,11 @@ export const documentsApi = {
                 "road_length": waypointLength,
                 "save_as_template" : "False"
             },
+            {
+                headers: {
+                    'x-csrf-token': csrf
+                }
+            }
            )
     },
     deleteWaypoint(waypointId){
@@ -192,19 +209,11 @@ export const testRequests = {
                 "road_length": 43.125,
                 "save_as_template" : "False"
             },
-            {
-                headers: {
-                    'x-csrf-token': '1575967873.54##7bd6120f1861a4d5c216637364bf596e5e73937f'
-              },
-        })
+            )
     },
     testDeleteSequence(){
         return axiosInstance.delete(`http://192.168.88.137:5000/api/iopw/statement_route/1`,
-            {
-                headers: {
-                    'x-csrf-token': '1575979469.06##fce8a5257c6076aa73dd64d04ba5a95e869d9948'
-                },
-            })
+            )
     },
     testPutSequence(id){
         return axiosInstance.put(`http://192.168.88.137:5000/api/iopw/statement_route/2`, {
@@ -243,10 +252,6 @@ export const testRequests = {
                 "road_length": 43.125,
                 "save_as_template" : "False"
             },
-            {
-                headers: {
-                    'x-csrf-token': '1575979469.06##fce8a5257c6076aa73dd64d04ba5a95e869d9948'
-                },
-            })
+           )
     },
 }

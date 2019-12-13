@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import {CircleMarker, Map as LeafletMap, Marker, Polyline} from "react-leaflet";
+import {CircleMarker, Polyline} from "react-leaflet";
 import invertColor from "../../utils/invertColor";
 import getPointsArrayFromLinestring from "../../utils/getPointsArrayFromLinestring";
 import RoadPopupContainer from "../RoadPopup/RoadPopupContainer";
@@ -33,13 +33,11 @@ const SelectedObject = props => {
                 <Fragment>
                     <Polyline positions={geometry} color={invertColor(userPreferences.dangerRoadsColor1)} weight={userPreferences.dangerRoadsWidth*2}
                               onContextMenu={(event) => {
-                                  event.preventDefault()
                               }}>
 
                     </Polyline>
                     <Polyline positions={geometry} dashArray={[`${userPreferences.dangerRoadsStrokeLength}`,`${userPreferences.dangerRoadsStrokeLength}`]} dashOffset={`${userPreferences.dangerRoadsStrokeLength}`} color={invertColor(userPreferences.dangerRoadsColor2)}  weight={userPreferences.dangerRoadsWidth*2}
                               onContextMenu={(event) => {
-                                  event.preventDefault()
                               }}>
 
                     </Polyline>

@@ -1,12 +1,21 @@
 import * as axios from 'axios';
 
+
+const getSCRF = async () =>
+{
+    const response = await axios.get('https://av.admtyumen.ru/get_csrf',{
+        withCredentials: true
+    })
+    return response.data.csrf_token
+
+}
 // development beta
 export const axiosInstance = axios.create({
     baseURL : 'https://av.admtyumen.ru/api/',
-    withCredentials: true,
     headers: {
-        'x-csrf-token': '1576139398.15##06d702c07d856ab7b54f977db1afe02f13446d80'
+        'x-csrf-token': getSCRF()
     }
+
 });
 
 
@@ -19,8 +28,9 @@ export const axiosInstance = axios.create({
 // });
 
 
-//uncomment for production
+// //uncomment for production
 // export const axiosInstance = axios.create({
 //     baseURL : '/weight_control/',
+//     withCredentials: true,
 // });
 

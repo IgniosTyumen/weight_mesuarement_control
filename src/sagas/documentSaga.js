@@ -1,13 +1,9 @@
-import {
-    SAVE_DIRECTION,
-    REMOVE_WAYPOINT
-} from '~/constants/WaypointsConstants'
+import {REMOVE_WAYPOINT, SAVE_DIRECTION} from '~/constants/WaypointsConstants'
 
 
+import {call, put, takeEvery} from 'redux-saga/effects'
 
-import { call, put, takeEvery, takeLatest, all, take } from 'redux-saga/effects'
-
-import {documentsApi, roadsApi, signsApi} from "../api/api";
+import {documentsApi} from "../api/api";
 import {calculateLengthOfPolyline} from "../utils/calculateLengthOfPolyline";
 import getLinestringFromArray from "../utils/getLinestringFromArray";
 
@@ -53,7 +49,6 @@ function* deleteDocumentActionsSaga(action) {
     try {
         const waypointId = action.waypoint;
         const response = yield call(()=>documentsApi.deleteWaypoint(waypointId));
-        console.log(response)
 
         yield put({
             type:REMOVE_WAYPOINT,

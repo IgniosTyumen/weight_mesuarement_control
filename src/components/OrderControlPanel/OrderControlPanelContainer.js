@@ -9,7 +9,7 @@ const OrderControlPanelContainer = props => {
     const {activeOrder, waypointActions,waypointTemplate,mapActions, userAuth} = props;
 
     const handleSave = () => {
-        if (waypointTemplate.templateWaypoint.id=='newCheckpoint'){
+        if (waypointTemplate.templateWaypoint.id === "newCheckpoint"){
             waypointActions.saveNewWaypoint(waypointTemplate,userAuth)
         } else {
             waypointActions.saveWaypoint(waypointTemplate,userAuth)

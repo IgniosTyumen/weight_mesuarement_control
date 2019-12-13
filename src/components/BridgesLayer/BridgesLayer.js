@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import {Map as LeafletMap, Marker, Popup} from "react-leaflet";
+import {Marker, Popup} from "react-leaflet";
 
 const BridgesLayer = (props) => {
 
@@ -36,7 +36,6 @@ const BridgesLayer = (props) => {
                     return (
                     <Marker position={points} key={bridge.id} icon={divIcon}
                             onContextMenu={(event) => {
-                        event.preventDefault()
                     }}>
                         <Popup>
                             <p>Тип моста : {bridge.bridge_overpass_type}</p>
