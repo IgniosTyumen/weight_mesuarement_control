@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Col, Row, Slider} from "antd";
 
 const SignsVisualSettings = ({userPreferencesActions,userPreferences}) => {
@@ -26,9 +26,9 @@ const SignsVisualSettings = ({userPreferencesActions,userPreferences}) => {
 
     const initFromProps = () => {
 
-        setSignsSize(userPreferences.signsSize);
-        setZoomMinSignsRender(userPreferences.zoomMinSignsRender);
-        setZoomMaxSignsRender(userPreferences.zoomMaxSignsRender);
+        setSignsSize(userPreferences.signsSize ? userPreferences.signsSize : 100);
+        setZoomMinSignsRender(userPreferences.zoomMinSignsRender ? userPreferences.zoomMinSignsRender : 5);
+        setZoomMaxSignsRender(userPreferences.zoomMaxSignsRender ? userPreferences.zoomMaxSignsRender : 14);
 
     }
 

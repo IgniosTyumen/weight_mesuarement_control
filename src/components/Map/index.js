@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import * as mapActions from "~/actions/MapActions";
 import * as waypointActions from "~/actions/WaypointActions";
 import * as appActions from "~/actions/AppActions";
-import {LayersControl, Map as LeafletMap, TileLayer, withLeaflet} from 'react-leaflet';
+import {Map as LeafletMap, TileLayer, withLeaflet} from 'react-leaflet';
 import RoadsLayerContainer from "../RoadsLayer/RoadsLayerContainer";
 import BridgesLayerContainer from "../BridgesLayer/BridgesLayerContainer";
 import SignsLayerContainer from "../SignsLayer/SignsLayerContainer";
@@ -41,7 +41,6 @@ class Map extends React.Component {
         const {center, zoom} = this.props.map;
         const {userPreferences} = this.props;
         const PrintControl = withLeaflet(PrintControlDefault);
-        const {BaseLayer, Overlay} = LayersControl;
         return (
             <LeafletMap
                 ref={(ref) => {
@@ -67,7 +66,7 @@ class Map extends React.Component {
 
                 <RoadsLayerContainer/>
                 <BridgesLayerContainer/>
-                {(zoom>=userPreferences.zoomMinSignsRender && zoom<=userPreferences.zoomMinSignsRender)  && <SignsLayerContainer/>}
+                {(zoom>=userPreferences.zoomMinSignsRender && zoom<=userPreferences.zoomMaxSignsRender)  && <SignsLayerContainer/>}
                 <DangerRoadsLayerContainer/>
                 <SelectedObjectContainer/>
                 <OrderPreviewLayerContainer/>

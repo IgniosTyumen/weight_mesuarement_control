@@ -1,41 +1,31 @@
 import {
-    INITIALIZE_APP,
-    INITIALIZE_SUCCESS,
     INITIALIZE_FAILURE,
-    SET_ROADS_TO_DOWNLOAD,
-    SET_ROADS_DOWNLOADED,
-    SET_SIGNS_TO_DOWNLOAD,
-    SET_SIGNS_DOWNLOADED,
-    SET_BRIDGES_TO_DOWNLOAD,
+    INITIALIZE_SUCCESS,
     SET_BRIDGES_DOWNLOADED,
-    ITERATE_ROADS_DOWNLOADED,
-    ITERATE_SIGNS_DOWNLOADED,
-    ITERATE_BRIDGES_DOWNLOADED,
-    SET_DANGERS_TO_DOWNLOAD,
+    SET_BRIDGES_TO_DOWNLOAD,
     SET_DANGERS_DOWNLOADED,
+    SET_DANGERS_TO_DOWNLOAD,
+    SET_ROADS_DOWNLOADED,
+    SET_ROADS_TO_DOWNLOAD,
 } from "~/constants/AppGlobalConstants";
 
-import {
-    SET_ALL_USER_PREFERENCES,
-} from '~/constants/UserSettingsConstants'
+import {SET_ALL_USER_PREFERENCES,} from '~/constants/UserSettingsConstants'
 
 
 import {
-    START_USER_AUTH_FETCHING,
-    USER_AUTH_FETCHING_SUCCESS,
-    USER_AUTH_FETCHING_FAILURE,
     SET_USER_AUTH_PARAMS,
+    START_USER_AUTH_FETCHING,
+    USER_AUTH_FETCHING_FAILURE,
+    USER_AUTH_FETCHING_SUCCESS,
 } from '~/constants/UserAuthParams'
 
 
-import {
-    SET_ROADS
-} from "~/constants/RoadsConstants";
+import {SET_ROADS} from "~/constants/RoadsConstants";
 
-import {call, put, takeEvery, takeLatest, all} from 'redux-saga/effects'
-import {dangersApi, documentsApi, roadsApi, testRequests, userApi} from "../api/api";
-import {getFakeOrderList} from "../utils/fakeOrderList";
+import {all, call, put, takeEvery} from 'redux-saga/effects'
+import {dangersApi, documentsApi, roadsApi, userApi} from "../api/api";
 import getPointsArrayFromLinestring from "../utils/getPointsArrayFromLinestring";
+import {initialState} from "../reducers/userPreferences";
 
 let counterBridgesDownloaded = 0;
 let counterSignsDownloaded = 0;
@@ -179,32 +169,33 @@ function* initialize(action) {
 
         const localSettings = localStorage.getItem('customSettings');
         if (localSettings) {
-            const roadColor = localStorage.getItem('roadColor');
-            const roadWidth = localStorage.getItem('roadWidth');
-            const dangerRoadsWidth = localStorage.getItem('dangerRoadsWidth');
-            const dangerRoadsStrokeLength = localStorage.getItem('dangerRoadsStrokeLength');
-            const dangerRoadsColor1 = localStorage.getItem('dangerRoadsColor1');
-            const dangerRoadsColor2 = localStorage.getItem('dangerRoadsColor2');
-            const signsVisibleListStr = localStorage.getItem('signsVisibleList').split('-');
-            const colorRoadFederal = localStorage.getItem('colorRoadFederal');
-            const colorRoadRegional = localStorage.getItem('colorRoadRegional');
-            const colorRoadMunicipal = localStorage.getItem('colorRoadMunicipal');
-            const lineWidthRoadFederal = localStorage.getItem('lineWidthRoadFederal');
-            const lineWidthRoadRegional = localStorage.getItem('lineWidthRoadRegional');
-            const lineWidthRoadMunicipal = localStorage.getItem('lineWidthRoadMunicipal');
-            const endpointRouteVisible = localStorage.getItem('endpointRouteVisible');
-            const endpointRouteWidth = localStorage.getItem('endpointRouteWidth');
-            const startDrawMarkerSize= localStorage.getItem('startDrawMarkerSize');
-            const endDrawMarkerSize= localStorage.getItem('endDrawMarkerSize');
-            const middleDrawMarkerSize= localStorage.getItem('middleDrawMarkerSize');
-            const pseudoDrawMarkerSize= localStorage.getItem('pseudoDrawMarkerSize');
-            const signsSize= localStorage.getItem('signsSize');
-            const zoomMinSignsRender= localStorage.getItem('zoomMinSignsRender');
-            const zoomMaxSignsRender= localStorage.getItem('zoomMaxSignsRender');
+            let roadColor = localStorage.getItem('roadColor')!=='null' ? localStorage.getItem('roadColor') : initialState.roadColor;
+            let roadWidth = localStorage.getItem('roadWidth')!=='null' ? localStorage.getItem('roadWidth') : initialState.roadWidth;
+            let dangerRoadsWidth = localStorage.getItem('dangerRoadsWidth')!=='null' ? localStorage.getItem('dangerRoadsWidth') : initialState.dangerRoadsWidth;
+            let dangerRoadsStrokeLength = localStorage.getItem('dangerRoadsStrokeLength')!=='null' ? localStorage.getItem('dangerRoadsStrokeLength') : initialState.dangerRoadsStrokeLength;
+            let dangerRoadsColor1 = localStorage.getItem('dangerRoadsColor1')!=='null' ? localStorage.getItem('dangerRoadsColor1') : initialState.dangerRoadsColor1;
+            let dangerRoadsColor2 = localStorage.getItem('dangerRoadsColor2')!=='null' ? localStorage.getItem('dangerRoadsColor2') : initialState.dangerRoadsColor2;
+            let signsVisibleListStr = localStorage.getItem('signsVisibleList')!=='null' ? localStorage.getItem('signsVisibleList').split('-')  : initialState.signsVisibleList;
+            let colorRoadFederal = localStorage.getItem('colorRoadFederal')!=='null' ? localStorage.getItem('colorRoadFederal') : initialState.colorRoadFederal;
+            let colorRoadRegional = localStorage.getItem('colorRoadRegional')!=='null' ? localStorage.getItem('colorRoadRegional') : initialState.colorRoadRegional;
+            let colorRoadMunicipal = localStorage.getItem('colorRoadMunicipal')!=='null' ? localStorage.getItem('colorRoadMunicipal') : initialState.colorRoadMunicipal;
+            let lineWidthRoadFederal = localStorage.getItem('lineWidthRoadFederal')!=='null' ? localStorage.getItem('lineWidthRoadFederal') : initialState.lineWidthRoadFederal;
+            let lineWidthRoadRegional = localStorage.getItem('lineWidthRoadRegional')!=='null' ? localStorage.getItem('lineWidthRoadRegional') : initialState.lineWidthRoadRegional;
+            let lineWidthRoadMunicipal = localStorage.getItem('lineWidthRoadMunicipal')!=='null' ? localStorage.getItem('lineWidthRoadMunicipal') : initialState.lineWidthRoadMunicipal;
+            let endpointRouteVisible = localStorage.getItem('endpointRouteVisible')!=='null' ? localStorage.getItem('endpointRouteVisible') : initialState.endpointRouteVisible;
+            let endpointRouteWidth = localStorage.getItem('endpointRouteWidth')!=='null' ? localStorage.getItem('endpointRouteWidth') : initialState.endpointRouteWidth;
+            let startDrawMarkerSize= localStorage.getItem('startDrawMarkerSize')!=='null' ? localStorage.getItem('startDrawMarkerSize') : initialState.startDrawMarkerSize;
+            let endDrawMarkerSize= localStorage.getItem('endDrawMarkerSize')!=='null' ? localStorage.getItem('endDrawMarkerSize') : initialState.endDrawMarkerSize;
+            let middleDrawMarkerSize= localStorage.getItem('middleDrawMarkerSize')!=='null' ? localStorage.getItem('middleDrawMarkerSize') : initialState.middleDrawMarkerSize;
+            let pseudoDrawMarkerSize= localStorage.getItem('pseudoDrawMarkerSize')!=='null' ? localStorage.getItem('pseudoDrawMarkerSize') : initialState.pseudoDrawMarkerSize;
+            let signsSize= localStorage.getItem('signsSize')!=='null' ? localStorage.getItem('signsSize') : initialState.signsSize;
+            let zoomMinSignsRender= localStorage.getItem('zoomMinSignsRender')!=='null' ? localStorage.getItem('zoomMinSignsRender') : initialState.zoomMinSignsRender;
+            let zoomMaxSignsRender= localStorage.getItem('zoomMaxSignsRender')!=='null' ? localStorage.getItem('zoomMaxSignsRender') : initialState.zoomMaxSignsRender;
+            let widthDrawLine= localStorage.getItem('widthDrawLine')!=='null' ? localStorage.getItem('widthDrawLine') : initialState.widthDrawLine;
 
             yield put({
                 type: SET_ALL_USER_PREFERENCES,
-                signsVisibleList: signsVisibleListStr,
+                signsVisibleList: signsVisibleListStr ,
                 roadColor,
                 roadWidth,
                 dangerRoadsWidth,
@@ -226,6 +217,7 @@ function* initialize(action) {
                 signsSize,
                 zoomMinSignsRender,
                 zoomMaxSignsRender,
+                widthDrawLine
             })
 
         }

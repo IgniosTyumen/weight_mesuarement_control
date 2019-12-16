@@ -1,6 +1,5 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {Fragment, useState} from "react";
 import {Marker, Polyline} from "react-leaflet";
-import {calculateLengthBetweenPoints} from "../../utils/calculateLengthBetweenPoints";
 
 const WaypointTemplateLayer = props => {
 
@@ -129,7 +128,7 @@ const WaypointTemplateLayer = props => {
         const coords = [(geoArray[it][0]+geoArray[it+1][0])/2,(geoArray[it][1]+geoArray[it+1][1])/2];
         SemimarkersArray.push(<Marker position={coords} draggable={true} onMoveEnd={(event)=>{addMarkerOnPosition(it, event)}}  icon={pseudoPointIcon}/>)
     }
-    const Poly = <Polyline positions={geoArray} color={'black'} weight={5} key={'template'} />
+    const Poly = <Polyline positions={geoArray} color={'black'} weight={userPreferences.widthDrawLine} key={'template'} />
 
     return (
         <Fragment>
