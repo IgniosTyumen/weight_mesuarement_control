@@ -6,19 +6,19 @@ import RoadPopupContainer from "../RoadPopup/RoadPopupContainer";
 import getPointsArrayFromPoint from "../../utils/getPointsArrayFromPoints";
 
 const SelectedObject = props => {
-    const {road, bridge,dangerRoad, userPreferences} = props;
-    let DrawableElement;
+    const {road, bridge,dangerRoad, userPreferences, tunnel, pipe, pipeline} = props;
+    let DrawableElement = null;
 
 
     if (road) {
-        const geometry = getPointsArrayFromLinestring(road.line_path);
+        const geometry = road.line_path ? getPointsArrayFromLinestring(road.line_path) : null;
         DrawableElement =
             <Polyline positions={geometry} key={road.id} color={invertColor(userPreferences.roadColor)} weight={userPreferences.roadWidth*2}>
                 <RoadPopupContainer road={road}/>
             </Polyline>
     } else
     if (bridge) {
-        const geometry = getPointsArrayFromPoint(bridge.point)[0];
+        const geometry = bridge.point ? getPointsArrayFromPoint(bridge.point)[0] : null;
         if (geometry) {
             DrawableElement =
                 <CircleMarker center={geometry} radius={10} color={invertColor(userPreferences.roadColor)}>
@@ -27,7 +27,7 @@ const SelectedObject = props => {
         }
     }else
     if (dangerRoad) {
-        const geometry = getPointsArrayFromLinestring(dangerRoad.path);
+        const geometry = dangerRoad.path ? getPointsArrayFromLinestring(dangerRoad.path) : null;
         if (geometry) {
             DrawableElement =
                 <Fragment>
@@ -42,6 +42,33 @@ const SelectedObject = props => {
 
                     </Polyline>
                 </Fragment>
+        }
+    } else
+    if (tunnel) {
+        const geometry = tunnel.point ? getPointsArrayFromPoint(tunnel.point)[0] : null;
+        if (geometry) {
+            DrawableElement =
+                <CircleMarker center={geometry} radius={10} color={invertColor(userPreferences.roadColor)}>
+
+                </CircleMarker>
+        }
+    }else
+    if (pipe) {
+        const geometry = pipe.point ? getPointsArrayFromPoint(pipe.point)[0] : null;
+        if (geometry) {
+            DrawableElement =
+                <CircleMarker center={geometry} radius={10} color={invertColor(userPreferences.roadColor)}>
+
+                </CircleMarker>
+        }
+    }else
+    if (pipeline) {
+        const geometry = pipeline.point ? getPointsArrayFromPoint(pipeline.point)[0] : null;
+        if (geometry) {
+            DrawableElement =
+                <CircleMarker center={geometry} radius={10} color={invertColor(userPreferences.roadColor)}>
+
+                </CircleMarker>
         }
     }
 

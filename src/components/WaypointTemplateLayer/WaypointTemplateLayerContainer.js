@@ -5,7 +5,7 @@ import * as waypointActions from '~/actions/WaypointActions'
 import * as appActions from '~/actions/AppActions'
 import {bindActionCreators} from "redux";
 
-const WaypointTemplateLayerContainer = ({waypointTemplate, waypointActions, appActions,visibleList, userPreferences,map}) => {
+const WaypointTemplateLayerContainer = ({waypointTemplate, waypointActions, appActions,visibleList, userPreferences,map,roads}) => {
 
 
     return (
@@ -16,6 +16,7 @@ const WaypointTemplateLayerContainer = ({waypointTemplate, waypointActions, appA
                 appActions={appActions}
                 userPreferences={userPreferences}
                 map={map}
+                roads={roads}
             />}
         </Fragment>
     )
@@ -27,6 +28,7 @@ const mapStateToProps = state => {
         visibleList: state.visibleFilter.invisibleList,
         userPreferences: state.userPreferences,
         map: state.map,
+        roads: state.roads
     }
 };
 

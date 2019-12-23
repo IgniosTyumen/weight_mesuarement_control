@@ -12,7 +12,9 @@ const RoadControlPanelContainer = ({roads, handleSelectDetailedObject, mapAction
 
 
     const moveMapToObject = (object) => {
-        mapActions.setCenterAndZoom(getPointsArrayFromLinestring(object.line_path)[0]);
+        if(object.point && object.point.length) {
+            mapActions.setCenterAndZoom(getPointsArrayFromLinestring(object.line_path)[0]);
+        }
         selectObjectsActions.selectRoad(object);
     }
 

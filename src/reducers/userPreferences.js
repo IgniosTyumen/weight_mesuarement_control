@@ -1,5 +1,7 @@
 import {
     SAVE_USER_REFERENCES,
+    SET_ALERT_COLOR,
+    SET_ALERT_WIDTH,
     SET_ALL_USER_PREFERENCES,
     SET_DANGER_ROAD_COLOR_MAIN_PREFERENCES,
     SET_DANGER_ROAD_COLOR_SECONDARY_PREFERENCES,
@@ -9,6 +11,12 @@ import {
     SET_ROAD_COLOR,
     SET_ROAD_ENDPOINTS_VISIBLE,
     SET_ROAD_ENDPOINTS_WIDTH,
+    SET_ROAD_FEDERAL_COLOR,
+    SET_ROAD_FEDERAL_WEIGHT,
+    SET_ROAD_MUNICIPAL_COLOR,
+    SET_ROAD_MUNICIPAL_WEIGHT,
+    SET_ROAD_REGIONAL_COLOR,
+    SET_ROAD_REGIONAL_WEIGHT,
     SET_ROAD_WEIGHT,
     SET_ROUTE_ENDPOINTS_VISIBLE,
     SET_ROUTE_ENDPOINTS_WIDTH,
@@ -22,7 +30,7 @@ import {
     SET_SIGNS_DRAW_MAP_ZOOM_MIN,
     SET_SIGNS_PREFERENCES,
     SET_SIGNS_SIZE,
-} from '~/constants/UserSettingsConstants'
+} from '../constants/UserSettingsConstants'
 
 export const initialState = {
     signsVisibleList: [
@@ -37,33 +45,46 @@ export const initialState = {
     ],
     roadColor: '#19a',
     roadWidth: '1',
-    dangerRoadsWidth: '1',
+    dangerRoadsWidth: '2',
     dangerRoadsStrokeLength: '10',
     dangerRoadsColor1: `#e69822`,
     dangerRoadsColor2: `#e02d23`,
     roadEndpointsVisible: true,
     roadEndpointsWidth: 10,
 
-    colorRoadFederal: '#e69822',
-    colorRoadRegional: '#e69822',
-    colorRoadMunicipal: '#e69822',
+    //for routes
+    colorRoadFederal: '#7d60b0',
+    colorRoadRegional: '#b34657',
+    colorRoadMunicipal: '#b59b5a',
 
-    lineWidthRoadFederal: '3',
-    lineWidthRoadRegional: '3',
-    lineWidthRoadMunicipal: '3',
+    lineWidthRoadFederal: '2',
+    lineWidthRoadRegional: '2',
+    lineWidthRoadMunicipal: '2',
 
     endpointRouteVisible: true,
-    endpointRouteWidth: '2',
+    endpointRouteWidth: 2,
 
     startDrawMarkerSize: 5,
     endDrawMarkerSize: 5,
     middleDrawMarkerSize: 5,
     pseudoDrawMarkerSize: 5,
-    widthDrawLine: 3,
+    widthDrawLine: 2,
 
     signsSize: 100,
     zoomMinSignsRender: 5,
     zoomMaxSignsRender: 16,
+
+    alertColor: '#ff0000',
+    alertWidth: 3,
+
+    roadColorFederal:'#3b29ad',
+    roadColorRegional:'#e69822',
+    roadColorMunicipal:'#e69899',
+
+    lineWidthRoadMainFederal: 2,
+    lineWidthRoadMainRegional: 2,
+    lineWidthRoadMainMunicipal: 2,
+
 };
 
 export default function userPreferences(state = initialState, action) {
@@ -77,6 +98,17 @@ export default function userPreferences(state = initialState, action) {
             return {
                 ...state,
                 roadColor: action.payload,
+            }
+
+        case SET_ALERT_COLOR:
+            return {
+                ...state,
+                alertColor: action.payload,
+            }
+        case SET_ALERT_WIDTH:
+            return {
+                ...state,
+                alertWidth: action.payload,
             }
 
 
@@ -102,6 +134,26 @@ export default function userPreferences(state = initialState, action) {
                 ...state,
                 roadWidth: action.payload,
             }
+
+
+
+        case SET_ROAD_FEDERAL_WEIGHT:
+            return {
+                ...state,
+                lineWidthRoadMainFederal: action.payload,
+            }
+        case SET_ROAD_REGIONAL_WEIGHT:
+            return {
+                ...state,
+                lineWidthRoadMainRegional: action.payload,
+            }
+        case SET_ROAD_MUNICIPAL_WEIGHT:
+            return {
+                ...state,
+                lineWidthRoadMainMunicipal: action.payload,
+            }
+
+
         case SET_ROUTE_FEDERAL_WEIGHT:
             return {
                 ...state,
@@ -174,6 +226,26 @@ export default function userPreferences(state = initialState, action) {
                 ...state,
                 zoomMaxSignsRender: action.payload
             }
+
+
+        case SET_ROAD_FEDERAL_COLOR:
+            return {
+                ...state,
+                roadColorFederal: action.payload
+            }
+        case SET_ROAD_REGIONAL_COLOR:
+            return {
+                ...state,
+                roadColorRegional: action.payload
+            }
+        case SET_ROAD_MUNICIPAL_COLOR:
+            return {
+                ...state,
+                roadColorMunicipal: action.payload
+            }
+
+
+
         case SET_DRAW_MARKER_SIZE:
             return {
                 ...state,
@@ -212,6 +284,16 @@ export default function userPreferences(state = initialState, action) {
                 zoomMinSignsRender: action.zoomMinSignsRender,
                 zoomMaxSignsRender: action.zoomMaxSignsRender,
                 widthDrawLine:action.widthDrawLine,
+                alertColor: action.alertColor,
+                alertWidth: action.alertWidth,
+                roadColorFederal: action.roadColorFederal,
+                roadColorRegional: action.roadColorRegional,
+                roadColorMunicipal: action.roadColorMunicipal,
+            lineWidthRoadMainFederal: action.lineWidthRoadMainFederal,
+                lineWidthRoadMainRegional: action.lineWidthRoadMainRegional,
+                    lineWidthRoadMainMunicipal: action.lineWidthRoadMainMunicipal,
+
+
 
             }
 
@@ -240,6 +322,17 @@ export default function userPreferences(state = initialState, action) {
             localStorage.setItem('zoomMinSignsRender', state.zoomMinSignsRender);
             localStorage.setItem('zoomMaxSignsRender', state.zoomMaxSignsRender);
             localStorage.setItem('widthDrawLine', state.widthDrawLine);
+
+            localStorage.setItem('alertColor', state.alertColor);
+            localStorage.setItem('alertWidth', state.alertWidth);
+
+            localStorage.setItem('roadColorFederal', state.roadColorFederal);
+            localStorage.setItem('roadColorRegional', state.roadColorRegional);
+            localStorage.setItem('roadColorMunicipal', state.roadColorMunicipal);
+            localStorage.setItem('lineWidthRoadMainFederal', state.lineWidthRoadMainFederal);
+            localStorage.setItem('lineWidthRoadMainRegional', state.lineWidthRoadMainRegional);
+            localStorage.setItem('lineWidthRoadMainMunicipal', state.lineWidthRoadMainMunicipal);
+
 
             return state;
         }

@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import SearchFieldWithTags from "../SearchFieldWithTags/SearchFieldWithTags";
 import Table from "@material-ui/core/Table";
 import {TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
-import TablePagination from "@material-ui/core/TablePagination";
 import TagsCloud from "../TagsCloud/TagsCloud";
 
 const BridgesPanel = (props) => {
@@ -51,7 +50,7 @@ const BridgesPanel = (props) => {
                         }
                     }
                 }
-                searchTabs.length ? null : alert('Объектов не найдено');
+
             }
             if (tagsList.indexOf('везде') >= 0) {
                 for (let bridge in bridges.bridges) {
@@ -71,7 +70,7 @@ const BridgesPanel = (props) => {
                         break;
                     }
                 }
-                searchTabs.length ? null : alert('Объектов не найдено');
+
             }
         }
 

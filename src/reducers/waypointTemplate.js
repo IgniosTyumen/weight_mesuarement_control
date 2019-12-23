@@ -1,23 +1,19 @@
 import {
-    SET_WAYPOINT_TEMPLATE,
-    SAVE_WAYPOINT_TEMPLATE,
-    CHANGE_WAYPOINT_STATUS,
-    CHANGE_WAYPOINT_COMMENT,
-    NEW_WAYPOINT_TEMPLATE,
-    CHANGE_CHECKPOINT_STATUS,
-    CHANGE_CHECKPOINT_POSITION,
     ADD_CHECKPOINT_MARKER,
-    PUSH_CHECKPOINT_MARKER,
-    PUSH_CHECKPOINT_MARKER_TO_START,
-    REMOVE_CHECKPOINT_MARKER,
     CHANGE_ALL_CHECKPOINTS,
-    SWAP_CHECKPOINTS_DIRECTION,
-    SAVE_DIRECTION,
-    CHANGE_NAME_OF_TEMPLATE_WAYPOINT,
+    CHANGE_CHECKPOINT_POSITION,
     CHANGE_DISTRICT_OF_TEMPLATE_WAYPOINT,
     CHANGE_IMPORTANCE_OF_TEMPLATE_WAYPOINT,
-    REMOVE_WAYPOINT
-} from '~/constants/WaypointsConstants'
+    CHANGE_NAME_OF_TEMPLATE_WAYPOINT,
+    NEW_WAYPOINT_TEMPLATE,
+    PUSH_CHECKPOINT_MARKER,
+    PUSH_CHECKPOINT_MARKER_TO_START,
+    QUIT_DIRECTION_WITHOUT_SAVING,
+    REMOVE_CHECKPOINT_MARKER,
+    SAVE_DIRECTION,
+    SET_WAYPOINT_TEMPLATE,
+    SWAP_CHECKPOINTS_DIRECTION
+} from '../constants/WaypointsConstants'
 
 const initialState = {
     templateWaypoint: undefined,
@@ -139,6 +135,9 @@ export default function waypointTemplate(state = initialState, action) {
                     importance: action.payload
                 }
             }
+        }
+        case QUIT_DIRECTION_WITHOUT_SAVING: {
+            return {...initialState}
         }
         default:
             return state;

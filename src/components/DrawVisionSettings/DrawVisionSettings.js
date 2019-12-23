@@ -1,5 +1,8 @@
 import React, {useState} from "react";
 import {Col, Row, Slider} from 'antd';
+import Dialog from "@material-ui/core/Dialog";
+import {SketchPicker} from "react-color";
+import Button from "../ui/Button";
 
 const DrawVisionSettings = props => {
 
@@ -15,6 +18,31 @@ const DrawVisionSettings = props => {
         width: Number.parseInt(userPreferences.pseudoDrawMarkerSize),
     });
 
+    const [colorRoad, setColorRoad] = useState()
+    const [visibleColorPicker, setVisibleColorPicker] = useState(false);
+    const [lineWidth, setLineWidth] = useState();
+
+    const handleChangeComplete = (color) => {
+        setColorRoad(color.hex);
+        userPreferencesActions.changeAlertColor(color.hex);
+
+    }
+
+    const handleColorPickerOpen = () => {
+        setVisibleColorPicker(true)
+    }
+
+    const handleColorPickerClose = () => {
+        setVisibleColorPicker(false)
+    }
+
+    const handleLineWidthChange = (value) => {
+        setLineWidth(value);
+    }
+
+    const handleLineWidthAfterChange = (value) => {
+        userPreferencesActions.changeAlertLineWeight(value);
+    }
 
 
 
@@ -135,6 +163,38 @@ const DrawVisionSettings = props => {
                             onAfterChange={(value)=>handleAfterChange(value,'pseudo')}
                             value={typeof sizeArray.pseudo === 'number' ? sizeArray.pseudo : 0}
                             step={1}
+                            included={true}
+                        />
+                    </Col>
+                </Row>
+            </div>
+
+            <div onClick={handleColorPickerOpen} className={'roadColorSelectorWrapper'}>
+                <span>Цвет линии предупреждения</span>
+                <div style={{backgroundColor: colorRoad}} className={'roadColorSelector'}/>
+            </div>
+            <Dialog open={visibleColorPicker}>
+                <div>
+                    <SketchPicker
+                        color={colorRoad}
+                        onChangeComplete={handleChangeComplete}
+                    />
+                    <Button variant onClick={handleColorPickerClose}>OK</Button>
+                </div>
+            </Dialog>
+            <div className={'settingsBlock'}>
+                <Row align={'middle'}>
+                    <Col span={6}>
+                        <p>Ширина линии предупреждения</p>
+                    </Col>
+                    <Col span={18}>
+                        <Slider
+                            min={0.5}
+                            max={5}
+                            onChange={handleLineWidthChange}
+                            onAfterChange={handleLineWidthAfterChange}
+                            value={typeof lineWidth === 'number' ? lineWidth : 0}
+                            step={0.1}
                             included={true}
                         />
                     </Col>

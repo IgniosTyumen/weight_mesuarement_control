@@ -51,7 +51,7 @@ const RoadControlPanel = (props) => {
                         }
                     }
                 }
-                searchTabs.length ? null : alert('Объектов не найдено');
+
             }
             if (tagsList.indexOf('везде') >= 0) {
                 for (let road in roads.roads) {
@@ -71,7 +71,7 @@ const RoadControlPanel = (props) => {
                         break;
                     }
                 }
-                searchTabs.length ? null : alert('Объектов не найдено');
+
             }
         }
         searchTabs.length ? iteratedObject = searchTabs : iteratedObject = roads.roads;
@@ -84,11 +84,28 @@ const RoadControlPanel = (props) => {
             <TagsCloud tags={tagsList} tagsRemoveAction={handlerRemoveTag}/>
             <div>
 
+                {/*<Table*/}
+                {/*    width={484}*/}
+                {/*    height={681}*/}
+                {/*    headerHeight={50}*/}
+                {/*    rowHeight={25}*/}
+                {/*    rowCount={iteratedObject.length}*/}
+                {/*    rowGetter={({index}) => iteratedObject[index]}*/}
+                {/*    onRowClick={({index})=>{*/}
+                {/*        moveMapToObject(iteratedObject[index])*/}
+                {/*        handleSelectDetailedObject(iteratedObject[index], 'road')*/}
+                {/*    }}*/}
+                {/*>*/}
+
+                {/*    <Column width={484}  dataKey={'name'} label={'Название дороги'}/>*/}
+
+                {/*</Table>*/}
+
                 <Table
-                    width={484}
-                    height={681}
+                    width={483}
+                    height={650}
                     headerHeight={50}
-                    rowHeight={25}
+                    rowHeight={50}
                     rowCount={iteratedObject.length}
                     rowGetter={({index}) => iteratedObject[index]}
                     onRowClick={({index})=>{
@@ -97,9 +114,15 @@ const RoadControlPanel = (props) => {
                     }}
                 >
 
-                    <Column width={484}  dataKey={'name'} label={'Название дороги'}/>
+                    <Column width={184}  dataKey={'name'} label={'Наименование'}/>
+                    {/*<Column width={80}  dataKey={'district_name'} label={'Округ'}/>*/}
+                    {/*<Column width={80}  dataKey={'city_name'} label={'Город'}/>*/}
+                    <Column width={121}  dataKey={'road_number'} label={'№ дороги'}/>
+                    <Column width={70}  dataKey={'start_road'} label={'Начало, км'}/>
+                    <Column width={70}  dataKey={'end_road'} label={'Конец, км'}/>
 
                 </Table>
+
             </div>
         </div>
     )

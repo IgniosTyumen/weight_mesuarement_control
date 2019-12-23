@@ -10,7 +10,10 @@ const DangerRoadsPanelContainer = ({dangerRoads, handleSelectDetailedObject,mapA
 
 
     const moveMapToObject = (object) => {
-        mapActions.setCenterAndZoom(getPointsArrayFromLinestring(object.path)[0]);
+        if(object.point && object.point.length) {
+            mapActions.setCenterAndZoom(getPointsArrayFromLinestring(object.path)[0]);
+        }
+
         selectObjectsActions.selectDangerRoad(object);
     }
 

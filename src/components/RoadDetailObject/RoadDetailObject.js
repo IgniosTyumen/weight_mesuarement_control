@@ -18,9 +18,10 @@ const RoadDetailObject = ({object, handleSelectDetailedObject, uploadFullRoadInf
 
             <p>Категория дороги: {object.road_category}</p>
 
-            <p>Правовой документ: {object.documents_register_prav}</p>
 
             <p>Принадлежность городу: {object.city ? object.city.name : 'Не указано'}</p>
+
+            <a href={`https://av.admtyumen.ru/#/directory/roaddirectory/inst_id=${object.id}`} target='_blank' rel="noopener noreferrer" >Открыть в справочнике</a>
 
             <div className={'detailedObjectPanelButtonGroup'}>
                 <Button type={'variant'} onClick={moveMapToObject}>Перейти</Button>

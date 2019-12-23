@@ -13,6 +13,10 @@ import SelectedObjectContainer from "../SelectedObject/SelectedObjectContainer";
 import PrintControlDefault from 'react-leaflet-easyprint';
 import OrderPreviewLayerContainer from "../OrderPreviewLayer/OrderPreviewLayerContainer";
 import WaypointTemplateLayerContainer from "../WaypointTemplateLayer/WaypointTemplateLayerContainer";
+import AwareLayerContainer from "../AwareLayer/AwareLayerContainer";
+import TunnelsLayerContainer from "../TunnelsLayer/TunnelsLayerContainer";
+import PipesLayerContainer from "../PipesLayer/PipesLayerContainer";
+import PipelinesLayerContainer from "../PipelinesLayer/PipelinesLayerContainer";
 
 
 class Map extends React.Component {
@@ -66,18 +70,22 @@ class Map extends React.Component {
 
                 <RoadsLayerContainer/>
                 <BridgesLayerContainer/>
+                <TunnelsLayerContainer/>
+                <PipesLayerContainer/>
+                <PipelinesLayerContainer/>
                 {(zoom>=userPreferences.zoomMinSignsRender && zoom<=userPreferences.zoomMaxSignsRender)  && <SignsLayerContainer/>}
                 <DangerRoadsLayerContainer/>
                 <SelectedObjectContainer/>
                 <OrderPreviewLayerContainer/>
                 <WaypointTemplateLayerContainer/>
+                <AwareLayerContainer/>
 
-                <PrintControl ref={(ref) => {
-                    this.printControl = ref;
-                }} position="topright" sizeModes={['Current', 'A4Portrait', 'A4Landscape']}
-                              hideControlContainer={false}/>
-                <PrintControl position="topright" sizeModes={['Current', 'A4Portrait', 'A4Landscape']}
-                              hideControlContainer={false} title="Export as PNG" exportOnly/>
+                {/*<PrintControl ref={(ref) => {*/}
+                {/*    this.printControl = ref;*/}
+                {/*}} position="topright" sizeModes={['Current', 'A4Portrait', 'A4Landscape']}*/}
+                {/*              hideControlContainer={false}/>*/}
+                {/*<PrintControl position="topright" sizeModes={['Current', 'A4Portrait', 'A4Landscape']}*/}
+                {/*              hideControlContainer={false} title="Export as PNG" exportOnly/>*/}
 
 
             </LeafletMap>

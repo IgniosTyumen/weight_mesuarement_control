@@ -1,29 +1,25 @@
 import {
-    SET_WAYPOINT_TEMPLATE,
-    SAVE_WAYPOINT_TEMPLATE,
-    CHANGE_WAYPOINT_STATUS,
-    CHANGE_WAYPOINT_COMMENT,
-    NEW_WAYPOINT_TEMPLATE,
-    CHANGE_CHECKPOINT_POSITION,
     ADD_CHECKPOINT_MARKER,
+    CHANGE_ALL_CHECKPOINTS,
+    CHANGE_CHECKPOINT_POSITION,
+    CHANGE_DISTRICT_OF_TEMPLATE_WAYPOINT,
+    CHANGE_IMPORTANCE_OF_TEMPLATE_WAYPOINT,
+    CHANGE_NAME_OF_TEMPLATE_WAYPOINT,
     PUSH_CHECKPOINT_MARKER,
     PUSH_CHECKPOINT_MARKER_TO_START,
     REMOVE_CHECKPOINT_MARKER,
-    CHANGE_ALL_CHECKPOINTS,
-    SWAP_CHECKPOINTS_DIRECTION,
-    SAVE_DIRECTION,
-    CHANGE_NAME_OF_TEMPLATE_WAYPOINT,
-    CHANGE_DISTRICT_OF_TEMPLATE_WAYPOINT,
-    CHANGE_IMPORTANCE_OF_TEMPLATE_WAYPOINT
+    SET_WAYPOINT_TEMPLATE,
+    SWAP_CHECKPOINTS_DIRECTION
 } from '~/constants/WaypointsConstants'
 
+import {REQUEST_AWARE_SEGMENTS} from '~/constants/AwareConstants'
 
-import {makeid} from "../utils/makeId";
+import {SWITCH_SHOW_EDIT_MARKERS} from '../constants/AppGlobalConstants'
 import React from "react";
+import {awareApi} from "../api/api";
 
 
 const waypointInitial = (userAuth) => {
-    debugger
     let importance='';
     if (userAuth.importanceRights.federal ) importance = 'Автомобильная дорога федерального значения';
     if (userAuth.importanceRights.regional ) importance = 'Автомобильная дорога регионального или межмуниципального значения';
@@ -64,6 +60,14 @@ const waypointInitial = (userAuth) => {
         user:userAuth
     }
 }
+
+export const toggleEditMarkersShow = () => dispatch => {
+    dispatch(
+        {
+            type:SWITCH_SHOW_EDIT_MARKERS
+        }
+    )
+};
 
 export const selectWaypoint = (waypoint, orderId, waypointId) => dispatch => {
     dispatch({
@@ -160,10 +164,11 @@ export const saveNewWaypoint = (waypoint,auth) => dispatch => {
     })
 };
 
-export const deleteWaypoint = (waypoint) => dispatch => {
+export const deleteWaypoint = (waypoint,orderId) => dispatch => {
     dispatch({
         type: 'DELETE_WAYPOINT',
-        waypoint
+        waypoint,
+        orderId
     })
 };
 
@@ -187,4 +192,33 @@ export const changeImportanceOfTemplate = (importance) => dispatch => {
         type:CHANGE_IMPORTANCE_OF_TEMPLATE_WAYPOINT,
         payload: importance
     })
+}
+
+export const calculateAwareData = (pointsArray) => dispatch =>{
+    dispatch({
+        type: REQUEST_AWARE_SEGMENTS,
+        payload: pointsArray
+    })
+}
+
+export const calculatePaperRoute = (pointsArray,roadsArray) => dispatch =>{
+    dispatch({
+        type: 'CALCULATE_PAPER_ROUTE',
+        pointsArray: pointsArray,
+        roadsArray: roadsArray
+    })
+}
+
+export const savePaperRoute = (id,paperRoute) => async dispatch =>{
+    const response = await awareApi.savePaperRoad(id,paperRoute)
+
+}
+
+
+export const quitWithoutSaving = () => dispatch => {
+    dispatch(
+        {
+            type:'QUIT_DIRECTION_WITHOUT_SAVING'
+        }
+    )
 }

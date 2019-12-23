@@ -26,6 +26,7 @@ const BridgeDetailsObject = ({object, handleSelectDetailedObject, moveMapToObjec
             <p>Принадленжит сегменту {object.segment_id ? object.segment_id : 'Не указано'}</p>
             {/*// type_obstruction_blocked: "Река"*/}
             <p>Тип пересекаемого объекта: {object.type_obstruction_blocked ? object.type_obstruction_blocked : 'Не указано'}</p>
+            <a href={`https://av.admtyumen.ru/#/directory/bridgesoverpasses/inst_id=${object.id}`} target='_blank' rel="noopener noreferrer" >Открыть в справочнике</a>
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
                 <Button type={'variant'} onClick={moveMapToObject}>Перейти</Button>
                 <Button type={'variant'} onClick={() => handleSelectDetailedObject(null, null)}>Закрыть</Button>

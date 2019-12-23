@@ -1,12 +1,6 @@
-import {
-    SET_ACTIVE_ORDER,
-    SET_ORDER_PREVIEW
-} from "~/constants/OrderConstants";
+import {SET_ACTIVE_ORDER, SET_ORDER_PREVIEW,} from "../constants/OrderConstants";
 
-import {
-    SAVE_DIRECTION,
-    REMOVE_WAYPOINT
-} from '~/constants/WaypointsConstants'
+import {REMOVE_WAYPOINT, SAVE_DIRECTION} from '~/constants/WaypointsConstants'
 
 const initialState = {
     activeOrder: undefined,
@@ -44,6 +38,7 @@ export default function activeOrders(state = initialState, action) {
             newState.activeOrder.waypoints = [...state.activeOrder.waypoints.filter(element=>element.id!==action.payload)];
             return newState
         }
+
         default:
             return state;
     }

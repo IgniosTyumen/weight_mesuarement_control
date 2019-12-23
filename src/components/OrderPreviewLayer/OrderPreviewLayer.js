@@ -27,15 +27,20 @@ const OrderPreviewLayer = (props) => {
                     <Fragment>
                         {userPreferences.endpointRouteVisible &&
                         <Fragment>
-                            <CircleMarker center={points[0]} radius={userPreferences.endpointRouteWidth} color={color}
+                            <CircleMarker
+                                key={'previewCircleMarkerStart'+previewOrder.waypoints[it].id+" "+it}
+                                center={points[0]} radius={userPreferences.endpointRouteWidth} color={color}
                                           onContextMenu={(event) => {
                                           }}/>
-                            <CircleMarker center={points[points.length - 1]} radius={userPreferences.endpointRouteWidth}
+                            <CircleMarker center={points[points.length - 1]}
+                                          key={'previewCircleMarkerEnd'+previewOrder.waypoints[it].id+" "+it}
+                                          radius={userPreferences.endpointRouteWidth}
                                           color={color}
                                           onContextMenu={(event) => {
                                           }}/>
                         </Fragment>}
                         <Polyline color={color} positions={points}
+                                  key={'previewPoly'+previewOrder.waypoints[it].id+" "+it}
                                   onContextMenu={(event) => {
                                   }}/>
                     </Fragment>

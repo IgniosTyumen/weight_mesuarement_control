@@ -1,5 +1,7 @@
 import {
     SAVE_USER_REFERENCES,
+    SET_ALERT_COLOR,
+    SET_ALERT_WIDTH,
     SET_DANGER_ROAD_COLOR_MAIN_PREFERENCES,
     SET_DANGER_ROAD_COLOR_SECONDARY_PREFERENCES,
     SET_DANGER_ROAD_STROKE_LENGTH_PREFERENCES,
@@ -8,6 +10,12 @@ import {
     SET_ROAD_COLOR,
     SET_ROAD_ENDPOINTS_VISIBLE,
     SET_ROAD_ENDPOINTS_WIDTH,
+    SET_ROAD_FEDERAL_COLOR,
+    SET_ROAD_FEDERAL_WEIGHT,
+    SET_ROAD_MUNICIPAL_COLOR,
+    SET_ROAD_MUNICIPAL_WEIGHT,
+    SET_ROAD_REGIONAL_COLOR,
+    SET_ROAD_REGIONAL_WEIGHT,
     SET_ROAD_WEIGHT,
     SET_ROUTE_ENDPOINTS_VISIBLE,
     SET_ROUTE_ENDPOINTS_WIDTH,
@@ -21,7 +29,7 @@ import {
     SET_SIGNS_DRAW_MAP_ZOOM_MIN,
     SET_SIGNS_PREFERENCES,
     SET_SIGNS_SIZE,
-} from '~/constants/UserSettingsConstants'
+} from '../constants/UserSettingsConstants'
 
 export const changeRoadColor = (colorHexCode) => (dispatch) => {
     dispatch({
@@ -33,6 +41,20 @@ export const changeRoadColor = (colorHexCode) => (dispatch) => {
 export const changeRoadLineWeight = (lineWidth) => (dispatch) => {
     dispatch({
         type:SET_ROAD_WEIGHT,
+        payload:lineWidth
+    })
+};
+
+export const changeAlertColor = (colorHexCode) => (dispatch) => {
+    dispatch({
+        type:SET_ALERT_COLOR,
+        payload:colorHexCode
+    })
+};
+
+export const changeAlertLineWeight = (lineWidth) => (dispatch) => {
+    dispatch({
+        type:SET_ALERT_WIDTH,
         payload:lineWidth
     })
 };
@@ -101,6 +123,7 @@ export const changeRouteColor = (colorAsString, typeAsString) => dispatch =>{
                 type: SET_ROUTE_FEDERAL_COLOR,
                 payload: colorAsString
             })
+            break;
 
         }
         case 'Автомобильная дорога регионального или межмуниципального значения':{
@@ -108,13 +131,71 @@ export const changeRouteColor = (colorAsString, typeAsString) => dispatch =>{
                 type: SET_ROUTE_REGIONAL_COLOR,
                 payload: colorAsString
             })
+            break;
         }
         case 'Автомобильная дорога местного значения': {
             dispatch({
                 type: SET_ROUTE_MUNICIPAL_COLOR,
                 payload: colorAsString
             })
+            break;
         }
+
+    }
+}
+//TODO customize
+export const changeRoadImportanceColor = (colorAsString, typeAsString) => dispatch =>{
+    switch (typeAsString) {
+        case 'federal': {
+            dispatch({
+                type: SET_ROAD_FEDERAL_COLOR,
+                payload: colorAsString
+            })
+            break;
+        }
+        case 'regional':{
+            dispatch({
+                type: SET_ROAD_REGIONAL_COLOR,
+                payload: colorAsString
+            })
+            break;
+        }
+        case 'municipal': {
+            dispatch({
+                type: SET_ROAD_MUNICIPAL_COLOR,
+                payload: colorAsString
+            })
+            break;
+        }
+
+    }
+}
+
+export const changeRoadImportanceLineWeight = (value, typeAsString) => dispatch =>{
+    switch (typeAsString) {
+        case 'federal': {
+            dispatch({
+                type: SET_ROAD_FEDERAL_WEIGHT,
+                payload: value
+            })
+            break;
+
+        }
+        case 'regional':{
+            dispatch({
+                type: SET_ROAD_REGIONAL_WEIGHT,
+                payload: value
+            })
+            break;
+        }
+        case 'municipal': {
+            dispatch({
+                type: SET_ROAD_MUNICIPAL_WEIGHT,
+                payload: value
+            })
+            break;
+        }
+
 
     }
 }
@@ -127,19 +208,21 @@ export const changeRouteLineWeight = (value, typeAsString) => dispatch =>{
                 type: SET_ROUTE_FEDERAL_WEIGHT,
                 payload: value
             })
-
+            break;
         }
         case 'regional':{
             dispatch({
                 type: SET_ROUTE_REGIONAL_WEIGHT,
                 payload: value
             })
+            break;
         }
         case 'municipal': {
             dispatch({
                 type: SET_ROUTE_MUNICIPAL_WEIGHT,
                 payload: value
             })
+            break;
         }
 
     }

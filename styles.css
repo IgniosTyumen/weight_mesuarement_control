@@ -225,7 +225,7 @@
 
 .mainGroupWindow.opened {
     position: relative;
-    height: 77vh;
+    height: 79vh;
     z-index: 1400;
     background-color: white;
     display: flex;
@@ -234,7 +234,7 @@
     border-bottom-right-radius: 15px;
     box-shadow: 0 1px 3px 0 rgba(38, 38, 38, 0.5);
     overflow-y: auto;
-    max-height: 74vh;
+    max-height: 79vh;
     overflow-x: hidden;
 }
 
@@ -448,7 +448,7 @@
 .drawPanel{
     position: absolute;
     top: 15px;
-    width: 238px;
+    width: fit-content;
     height: 42px;
     left: 50%;
     transform: translateX(-50%);
@@ -465,7 +465,7 @@
 
 .drawPanelMessageBox{
     position: absolute;
-    top: 40px;
+    top: 55px;
     width: auto;
     height: auto;
     left: 50%;
@@ -499,4 +499,56 @@
 
 .ant-tooltip {
     z-index: 2000;
+}
+
+@keyframes pulsate{50%{color:#fff;text-shadow:0 -1px rgba(0,0,0,.3),0 0 5px #f03000,0 0 8px #f80000;}
+}
+
+.flicker{
+    color: rgb(245,245,245);
+    /*text-shadow: 0 -1px rgba(0,0,0,.1);*/
+    /*font-size: 32px;*/
+    /*font-weight: 600;*/
+    /*text-decoration: none;*/
+    /*-webkit-animation: pulsate 1.2s linear infinite;*/
+    /*animation: pulsate 1.2s linear infinite;*/
+}
+
+.citySearchBlock{
+    width: 500px;
+    height: 113px;
+    padding: 20px;
+}
+
+
+
+.ReactVirtualized__Table__headerRow{
+    display: flex;
+    text-align: left;
+    text-align: center;
+}
+
+.ReactVirtualized__Table__row{
+    display: flex;
+    border-top: 1px solid gray;
+    align-items: center;
+}
+
+.ReactVirtualized__Table__headerColumn{
+    text-align: left;
+}
+
+.ReactVirtualized__Table__rowColumn{
+    text-align: left;
+    padding: 5px;
+    user-select: none;
+    margin-top: auto;
+}
+
+
+.ReactVirtualized__Table__row:hover{
+    /*background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;*/
+    background-color: #6eb9f7;
+    background-size: 100%;
+    transition: background 0s;
 }

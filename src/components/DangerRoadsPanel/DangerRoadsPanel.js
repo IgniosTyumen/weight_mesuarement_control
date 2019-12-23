@@ -52,7 +52,7 @@ const DangerRoadsPanel = (props) => {
                         }
                     }
                 }
-                searchTabs.length ? null : alert('Объектов не найдено');
+
             }
             if (tagsList.indexOf('везде') >= 0) {
                 for (let road in dangerRoads.dangers) {
@@ -72,7 +72,7 @@ const DangerRoadsPanel = (props) => {
                         break;
                     }
                 }
-                searchTabs.length ? null : alert('Объектов не найдено');
+
             }
         }
 
@@ -94,7 +94,7 @@ const DangerRoadsPanel = (props) => {
 
     return (
         <div className={"mainGroupPanel"}>
-            <p className={'mainGroupPanelTitle'}>Список мостов</p>
+            <p className={'mainGroupPanelTitle'}>Список аварийно-опасных участков</p>
             <SearchFieldWithTags tagsAddAction={handlerAddTag} upSearchValue={upSearchValue}/>
             <TagsCloud tags={tagsList} tagsRemoveAction={handlerRemoveTag}/>
             <div>

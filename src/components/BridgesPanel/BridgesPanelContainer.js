@@ -10,7 +10,9 @@ import getPointsArrayFromPoint from "../../utils/getPointsArrayFromPoints";
 const BridgesPanelContainer = ({bridges, handleSelectDetailedObject,mapActions,selectObjectsActions}) => {
 
     const moveMapToObject = (object) => {
-        mapActions.setCenterAndZoom(getPointsArrayFromPoint(object.point)[0]);
+        if(object.point && object.point.length) {
+            mapActions.setCenterAndZoom(getPointsArrayFromPoint(object.point)[0]);
+        }
         selectObjectsActions.selectBridge(object);
     }
 

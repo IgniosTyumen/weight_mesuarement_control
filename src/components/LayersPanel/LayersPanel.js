@@ -9,9 +9,7 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SignsVisionFilterContainer from "../SignsVisionFilter/SignsVisionFilterContainer";
 import RoadVisionSettingsContainer from "../RoadsVisionSettings/RoadVisionSettingsContainer";
-import Paper from "@material-ui/core/Paper";
 import SaveIcon from '@material-ui/icons/Save';
-import Button from "../ui/Button";
 import IconButton from "@material-ui/core/IconButton";
 import DangerRoadVisionSettingsContainer from "../DangerRoadsVisionSettings/DangerRoadVisionSettingsContainer";
 import RouteVisionSettingsContainer from "../RouteVisionSettings/RouteVisionSettingsContainer";
@@ -26,7 +24,10 @@ const LayersPanel = (props) => {
         signs:false,
         dangers: false,
         routes:false,
-        draw:false
+        draw:false,
+        tunnels:false,
+        pipes:false,
+        pipelines:false
     });
 
     const {mapVisibleFiltersActions, mapInvisibleList, userPreferencesActions} = props;
@@ -80,35 +81,125 @@ const LayersPanel = (props) => {
     </ExpansionPanel>
 
 
-        {/*<ExpansionPanel expanded={expandedPanelsList.bridges}>*/}
-        {/*    <ExpansionPanelSummary>*/}
-        {/*        <div className={"panelSummaryDecorator"}>*/}
-        {/*            <p className={"panelSummaryDecoratorText"}>Слой мостов</p>*/}
-        {/*            <div className={"panelSummaryDecoratorActions"}>*/}
-        {/*                <Checkbox icon={<VisibilityIcon/>} checkedIcon={<VisibilityOffIcon/>}*/}
-        {/*                          value={mapInvisibleList.includes('bridges') }*/}
-        {/*                          color={"primary"}*/}
-        {/*                          onClick={(event) => {*/}
-        {/*                              event.stopPropagation();*/}
-        {/*                              handleVisibleChange('bridges', event)*/}
-        {/*                          }}*/}
-        {/*                />*/}
-        {/*                <Checkbox icon={<ExpandMoreIcon/>} checkedIcon={<ExpandLessIcon/>}*/}
-        {/*                          value={expandedPanelsList.roads}*/}
-        {/*                          color={"primary"}*/}
-        {/*                          onClick={*/}
-        {/*                              (event)=>{*/}
-        {/*                                  event.stopPropagation();*/}
-        {/*                                  handleExpandLayouts('bridges')*/}
-        {/*                              }*/}
-        {/*                          }/>*/}
-        {/*            </div>*/}
-        {/*        </div>*/}
-        {/*    </ExpansionPanelSummary>*/}
-        {/*    <ExpansionPanelDetails>*/}
-        {/*        <h1>bridges</h1>*/}
-        {/*    </ExpansionPanelDetails>*/}
-        {/*</ExpansionPanel>*/}
+        <ExpansionPanel expanded={expandedPanelsList.bridges}>
+            <ExpansionPanelSummary>
+                <div className={"panelSummaryDecorator"}>
+                    <p className={"panelSummaryDecoratorText"}>Слой мостов</p>
+                    <div className={"panelSummaryDecoratorActions"}>
+                        <Checkbox icon={<VisibilityIcon/>} checkedIcon={<VisibilityOffIcon/>}
+                                  value={mapInvisibleList.includes('bridges') }
+                                  color={"primary"}
+                                  onClick={(event) => {
+                                      event.stopPropagation();
+                                      handleVisibleChange('bridges', event)
+                                  }}
+                        />
+                        {/*<Checkbox icon={<ExpandMoreIcon/>} checkedIcon={<ExpandLessIcon/>}*/}
+                        {/*          value={expandedPanelsList.roads}*/}
+                        {/*          color={"primary"}*/}
+                        {/*          onClick={*/}
+                        {/*              (event)=>{*/}
+                        {/*                  event.stopPropagation();*/}
+                        {/*                  handleExpandLayouts('bridges')*/}
+                        {/*              }*/}
+                        {/*          }/>*/}
+                    </div>
+                </div>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+                {/*<h1>bridges</h1>*/}
+            </ExpansionPanelDetails>
+        </ExpansionPanel>
+
+            <ExpansionPanel expanded={expandedPanelsList.tunnels}>
+                <ExpansionPanelSummary>
+                    <div className={"panelSummaryDecorator"}>
+                        <p className={"panelSummaryDecoratorText"}>Слой тоннелей</p>
+                        <div className={"panelSummaryDecoratorActions"}>
+                            <Checkbox icon={<VisibilityIcon/>} checkedIcon={<VisibilityOffIcon/>}
+                                      value={mapInvisibleList.includes('tunnels') }
+                                      color={"primary"}
+                                      onClick={(event) => {
+                                          event.stopPropagation();
+                                          handleVisibleChange('tunnels', event)
+                                      }}
+                            />
+                            {/*<Checkbox icon={<ExpandMoreIcon/>} checkedIcon={<ExpandLessIcon/>}*/}
+                            {/*          value={expandedPanelsList.roads}*/}
+                            {/*          color={"primary"}*/}
+                            {/*          onClick={*/}
+                            {/*              (event)=>{*/}
+                            {/*                  event.stopPropagation();*/}
+                            {/*                  handleExpandLayouts('bridges')*/}
+                            {/*              }*/}
+                            {/*          }/>*/}
+                        </div>
+                    </div>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                    {/*<h1>bridges</h1>*/}
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
+
+            <ExpansionPanel expanded={expandedPanelsList.pipes}>
+                <ExpansionPanelSummary>
+                    <div className={"panelSummaryDecorator"}>
+                        <p className={"panelSummaryDecoratorText"}>Слой труб</p>
+                        <div className={"panelSummaryDecoratorActions"}>
+                            <Checkbox icon={<VisibilityIcon/>} checkedIcon={<VisibilityOffIcon/>}
+                                      value={mapInvisibleList.includes('pipes') }
+                                      color={"primary"}
+                                      onClick={(event) => {
+                                          event.stopPropagation();
+                                          handleVisibleChange('pipes', event)
+                                      }}
+                            />
+                            {/*<Checkbox icon={<ExpandMoreIcon/>} checkedIcon={<ExpandLessIcon/>}*/}
+                            {/*          value={expandedPanelsList.roads}*/}
+                            {/*          color={"primary"}*/}
+                            {/*          onClick={*/}
+                            {/*              (event)=>{*/}
+                            {/*                  event.stopPropagation();*/}
+                            {/*                  handleExpandLayouts('bridges')*/}
+                            {/*              }*/}
+                            {/*          }/>*/}
+                        </div>
+                    </div>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                    {/*<h1>bridges</h1>*/}
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
+
+            <ExpansionPanel expanded={expandedPanelsList.pipelines}>
+                <ExpansionPanelSummary>
+                    <div className={"panelSummaryDecorator"}>
+                        <p className={"panelSummaryDecoratorText"}>Слой трубопроводов</p>
+                        <div className={"panelSummaryDecoratorActions"}>
+                            <Checkbox icon={<VisibilityIcon/>} checkedIcon={<VisibilityOffIcon/>}
+                                      value={mapInvisibleList.includes('pipelines') }
+                                      color={"primary"}
+                                      onClick={(event) => {
+                                          event.stopPropagation();
+                                          handleVisibleChange('pipelines', event)
+                                      }}
+                            />
+                            {/*<Checkbox icon={<ExpandMoreIcon/>} checkedIcon={<ExpandLessIcon/>}*/}
+                            {/*          value={expandedPanelsList.roads}*/}
+                            {/*          color={"primary"}*/}
+                            {/*          onClick={*/}
+                            {/*              (event)=>{*/}
+                            {/*                  event.stopPropagation();*/}
+                            {/*                  handleExpandLayouts('bridges')*/}
+                            {/*              }*/}
+                            {/*          }/>*/}
+                        </div>
+                    </div>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                    {/*<h1>bridges</h1>*/}
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
 
 
             <ExpansionPanel expanded={expandedPanelsList.signs}>

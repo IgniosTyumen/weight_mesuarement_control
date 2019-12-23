@@ -1,17 +1,12 @@
-import {
-  SET_CENTER,
-  GEOMETRY_WIGHT,
-  SET_VIEWPORT_COORDINATES,
-  SET_ZOOM,
-  SET_CENTER_AND_ZOOM
-} from "~/constants/Map";
+import {GEOMETRY_WIGHT, SET_CENTER, SET_CENTER_AND_ZOOM, SET_VIEWPORT_COORDINATES, SET_ZOOM} from "~/constants/Map";
 
 import {
-  ENABLE_ADD_MARKER_MODE,
-  DISABLE_ADD_MARKER_MODE,
-  SWITCH_ADD_MARKER_MODE,
-  SWITCH_PULL_MARKER_MODE
-} from "~/constants/AppGlobalConstants";
+    DISABLE_ADD_MARKER_MODE,
+    ENABLE_ADD_MARKER_MODE,
+    SWITCH_ADD_MARKER_MODE,
+    SWITCH_PULL_MARKER_MODE,
+    SWITCH_SHOW_EDIT_MARKERS
+} from "../constants/AppGlobalConstants";
 
 const initialState = {
   center: [57.144075, 65.5579277777778],
@@ -21,11 +16,17 @@ const initialState = {
   viewport : [57.144075, 65.5579277777778],
   editMode: false,
   pullMode: false,
+  showEditMarkers : true
 }
 
 export default function map(state = initialState, action) {
   switch (action.type) {
-    case SET_CENTER:
+    case SWITCH_SHOW_EDIT_MARKERS:
+      return {
+        ...state,
+        showEditMarkers: !state.showEditMarkers
+      }
+      case SET_CENTER:
       return {
         ...state,
         center: action.payload

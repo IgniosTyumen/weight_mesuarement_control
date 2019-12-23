@@ -24624,6 +24624,64 @@ div.antd__ant-typography-edit-content--_XmQa {
     opacity: 0;
   }
 }
+.react-dadata__react-dadata__container--1CHdj {
+  position: relative;
+}
+
+.react-dadata__react-dadata__input--3gl0U {
+  display: block;
+  box-sizing: border-box;
+  height: 38px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 16px;
+  padding: 0 10px;
+}
+
+.react-dadata__react-dadata__input--3gl0U:focus {
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px rgba(255,154,0,0.1);
+  border-color: #FF931E;
+}
+
+.react-dadata__react-dadata__suggestions--EAT49 {
+  position: absolute;
+  z-index: 10;
+  background-color: #fff;
+  box-shadow: 0 1px 6px 3px rgba(0,0,0,.1);
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.react-dadata__react-dadata__suggestion-note--1QDSi {
+  font-size: 14px;
+  color: #828282;
+  padding: 10px 10px 5px 10px;
+}
+
+.react-dadata__react-dadata__suggestion--2QaOP {
+  font-size: 15px;
+  padding: 7px 10px;
+  cursor: pointer;
+}
+
+.react-dadata__react-dadata__suggestion--current--3y-yK {
+  background-color: #FFF5E7;
+}
+
+.react-dadata__react-dadata__suggestion--2QaOP:hover {
+  background-color: #FFF9F0;
+}
+
+.react-dadata__react-dadata--9USBW mark {
+  background: none;
+}
+
+.react-dadata__react-dadata--highlighted--1CwVI {
+  color: #E5841C;
+}
+
 @import 'node_modules/antd/dist/antd.css';
 
 .mainControlPanel{
@@ -24851,7 +24909,7 @@ div.antd__ant-typography-edit-content--_XmQa {
 
 .mainGroupWindow.opened {
     position: relative;
-    height: 77vh;
+    height: 79vh;
     z-index: 1400;
     background-color: white;
     display: flex;
@@ -24860,7 +24918,7 @@ div.antd__ant-typography-edit-content--_XmQa {
     border-bottom-right-radius: 15px;
     box-shadow: 0 1px 3px 0 rgba(38, 38, 38, 0.5);
     overflow-y: auto;
-    max-height: 74vh;
+    max-height: 79vh;
     overflow-x: hidden;
 }
 
@@ -25074,7 +25132,7 @@ div.antd__ant-typography-edit-content--_XmQa {
 .drawPanel{
     position: absolute;
     top: 15px;
-    width: 238px;
+    width: fit-content;
     height: 42px;
     left: 50%;
     transform: translateX(-50%);
@@ -25091,7 +25149,7 @@ div.antd__ant-typography-edit-content--_XmQa {
 
 .drawPanelMessageBox{
     position: absolute;
-    top: 40px;
+    top: 55px;
     width: auto;
     height: auto;
     left: 50%;
@@ -25125,5 +25183,57 @@ div.antd__ant-typography-edit-content--_XmQa {
 
 .ant-tooltip {
     z-index: 2000;
+}
+
+@keyframes pulsate{50%{color:#fff;text-shadow:0 -1px rgba(0,0,0,.3),0 0 5px #f03000,0 0 8px #f80000;}
+}
+
+.flicker{
+    color: rgb(245,245,245);
+    /*text-shadow: 0 -1px rgba(0,0,0,.1);*/
+    /*font-size: 32px;*/
+    /*font-weight: 600;*/
+    /*text-decoration: none;*/
+    /*-webkit-animation: pulsate 1.2s linear infinite;*/
+    /*animation: pulsate 1.2s linear infinite;*/
+}
+
+.citySearchBlock{
+    width: 500px;
+    height: 113px;
+    padding: 20px;
+}
+
+
+
+.ReactVirtualized__Table__headerRow{
+    display: flex;
+    text-align: left;
+    text-align: center;
+}
+
+.ReactVirtualized__Table__row{
+    display: flex;
+    border-top: 1px solid gray;
+    align-items: center;
+}
+
+.ReactVirtualized__Table__headerColumn{
+    text-align: left;
+}
+
+.ReactVirtualized__Table__rowColumn{
+    text-align: left;
+    padding: 5px;
+    user-select: none;
+    margin-top: auto;
+}
+
+
+.ReactVirtualized__Table__row:hover{
+    /*background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;*/
+    background-color: #6eb9f7;
+    background-size: 100%;
+    transition: background 0s;
 }
 

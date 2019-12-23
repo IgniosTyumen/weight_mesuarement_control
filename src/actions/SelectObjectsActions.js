@@ -1,8 +1,11 @@
 import {
-    SELECT_ROAD,
     SELECT_BRIDGE,
-    SELECT_DANGER_ROAD
-} from "~/constants/SelectConstants";
+    SELECT_DANGER_ROAD,
+    SELECT_PIPE,
+    SELECT_PIPELINE,
+    SELECT_ROAD,
+    SELECT_TUNNEL,
+} from "../constants/SelectConstants";
 
 export const selectRoad = (object) => dispatch =>{
      dispatch( {
@@ -25,4 +28,23 @@ export const selectDangerRoad = (object) => dispatch =>{
     })
 }
 
+export const selectTunnel = (object) => dispatch =>{
+    dispatch( {
+        type: SELECT_TUNNEL,
+        payload: object
+    })
+}
 
+export const selectPipe = (object) => dispatch =>{
+    dispatch( {
+        type: SELECT_PIPE,
+        payload: object
+    })
+}
+
+export const selectPipeline = (object) => dispatch =>{
+    dispatch( {
+        type: SELECT_PIPELINE,
+        payload: object
+    })
+}

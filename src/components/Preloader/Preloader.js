@@ -1,5 +1,6 @@
-import React, {useState} from "react";
-import LinearProgress from "@material-ui/core/LinearProgress";
+import React from "react";
+import Button from "@material-ui/core/Button";
+import {Alert} from "antd";
 
 const Preloader = (props) => {
     const {initial, dispatch} = props;
@@ -58,20 +59,38 @@ const Preloader = (props) => {
         }, 1750)
     }
 
+    const handleReinitApp = () => {
+        dispatch({
+            type: 'INITIALIZE_APP'
+        })
+    };
+
     return (
         <div className={initial.isInitialized ? 'closedPreloader animatePreloadOut' : 'preloader'}>
+            {initial.isInitialized===false ? <Alert
+                type="error"
+                message="Во время загрузки произошла ошибка"
+                banner
+                closable
+            /> : null}
             {svgLogo}
-            <div className={classForBridgesLoader}>
-                <p>Файлов мостов к загрузке: {initial.bridgesDownloaded} / {initial.bridgesToDownload}</p>
-                <LinearProgress variant="determinate"
-                                value={bridgesPercentage}/>
-            </div>
-            <div className={classForDangersLoader}>
-                <p>Файлов опасных участков к загрузке: {initial.dangersDownloaded} / {initial.dangersToDownload}</p>
-                <LinearProgress variant="determinate" value={dangersPercentage}/>
-            </div>
+            {/*<div className={classForBridgesLoader}>*/}
+            {/*    <p>Файлов мостов к загрузке: {initial.bridgesDownloaded} / {initial.bridgesToDownload}</p>*/}
+            {/*    <LinearProgress variant="determinate"*/}
+            {/*                    value={bridgesPercentage}/>*/}
+            {/*</div>*/}
+            {/*<div className={classForDangersLoader}>*/}
+            {/*    <p>Файлов опасных участков к загрузке: {initial.dangersDownloaded} / {initial.dangersToDownload}</p>*/}
+            {/*    <LinearProgress variant="determinate" value={dangersPercentage}/>*/}
+            {/*</div>*/}
 
             <p className={'preloaderTitle'}>Работа начнется как только все файлы будут загружены</p>
+
+            <div style={{display:'flex',justifyContent:"center"}}>
+
+                {initial.isInitialized===false ? <Button onClick={handleReinitApp} >Перезапустить приложение</Button> : null}
+
+            </div>
         </div>
     )
 };

@@ -6,7 +6,7 @@ import * as mapActions from '~/actions/MapActions'
 import {bindActionCreators} from "redux";
 
 const OrderControlPanelContainer = props => {
-    const {activeOrder, waypointActions,waypointTemplate,mapActions, userAuth} = props;
+    const {activeOrder, waypointActions,waypointTemplate,mapActions, userAuth, awareList} = props;
 
     const handleSave = () => {
         if (waypointTemplate.templateWaypoint.id === "newCheckpoint"){
@@ -20,6 +20,14 @@ const OrderControlPanelContainer = props => {
         waypointActions.createWaypoint(activeOrder.number, activeOrder.waypoints.length,userAuth);
     }
 
+    const dispatchAwareObjects = () => {
+        waypointActions.calculateAwareData(waypointsTemplateGeometry)
+    }
+
+    const handleQuit = () => {
+        waypointActions.quitWithoutSaving()
+    }
+
     return (
         <OrderControlPanel
             waypointTemplate={waypointTemplate}
@@ -29,6 +37,9 @@ const OrderControlPanelContainer = props => {
             handleNewWaypoint={handleNewWaypoint}
             mapActions={mapActions}
             userAuth={userAuth}
+            dispatchAwareObjects={dispatchAwareObjects}
+            awareList={awareList}
+            handleQuit={handleQuit}
         />
     )
 };
@@ -37,7 +48,8 @@ const mapStateToProps = state => {
     return {
         activeOrder: state.activeOrder.activeOrder,
         waypointTemplate: state.waypointTemplate,
-        userAuth: state.userAuth
+        userAuth: state.userAuth,
+        awareList: state.aware
     }
 };
 

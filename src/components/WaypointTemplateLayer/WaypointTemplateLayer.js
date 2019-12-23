@@ -1,11 +1,12 @@
 import React, {Fragment, useState} from "react";
 import {Marker, Polyline} from "react-leaflet";
 
+
 const WaypointTemplateLayer = props => {
 
-    const {waypointTemplate,waypointActions,appActions,userPreferences, map} = props;
+    const {waypointTemplate, waypointActions, appActions, userPreferences, map, roads} = props;
 
-    const [routeLength,setRouteLength] = useState(0.0)
+    const [routeLength, setRouteLength] = useState(0.0)
 
     const startPointIconDiv = `
        <div class="startPointIcon"
@@ -61,11 +62,11 @@ const WaypointTemplateLayer = props => {
     );
 
     const changeMarkerPosition = (position, event) => {
-        waypointActions.moveCheckpoint([event.target._latlng.lat,event.target._latlng.lng], position);
+        waypointActions.moveCheckpoint([event.target._latlng.lat, event.target._latlng.lng], position);
     }
 
-    const addMarkerOnPosition = (position,event) => {
-       waypointActions.addCheckpoint([event.target._latlng.lat,event.target._latlng.lng], position+1)
+    const addMarkerOnPosition = (position, event) => {
+        waypointActions.addCheckpoint([event.target._latlng.lat, event.target._latlng.lng], position + 1)
 
     }
 
@@ -79,61 +80,80 @@ const WaypointTemplateLayer = props => {
     }
 
     const handleDeleteMarker = (index) => {
-        debugger
-        if (templateWaypoint.geometry.points.length===1) {
+        if (templateWaypoint.geometry.points.length === 1) {
             appActions.enableAddMarkerMode();
         }
         waypointActions.deleteCheckpoint(index);
     }
 
     const {templateWaypoint} = waypointTemplate;
-    const geoArray = [...templateWaypoint.geometry.points];
+    let geoArray = [...templateWaypoint.geometry.points];
+        // if (geoArray.length>150) {
+        //
+        //     let projectedLinestring = lineString(geoArray);
+        //     projectedLinestring = cleanCoords(projectedLinestring);
+        //     const simplifySettings = {tolerance: 0.01, highQuality: true };
+        //     while (projectedLinestring.geometry.coordinates.length>150){
+        //         projectedLinestring = simplify(projectedLinestring,simplifySettings);
+        //     }
+        //     geoArray = projectedLinestring.geometry.coordinates
+        // }
     const MarkersArray = [];
     const SemimarkersArray = [];
-    for (let it=0;it<geoArray.length;it++){
-        if (it===0){
+    for (let it = 0; it < geoArray.length; it++) {
+        if (it === 0) {
             MarkersArray.push(
                 <Marker
                     position={geoArray[it]}
                     draggable={true}
-                    onMoveEnd={(event)=>{changeMarkerPosition(it, event)}}
+                    onMoveEnd={(event) => {
+                        changeMarkerPosition(it, event)
+                    }}
                     onClick={handleMarkerClickAndActivatePullEditMode}
                     icon={startPointIcon}
-                    onContextMenu={()=>handleDeleteMarker(it)}
+                    onContextMenu={() => handleDeleteMarker(it)}
                 />
-                )
-        }else
-        if (it!=0 && it!=geoArray.length-1){
+            )
+        } else if (it != 0 && it != geoArray.length - 1) {
             MarkersArray.push(
                 <Marker
                     position={geoArray[it]}
                     draggable={true}
-                    onMoveEnd={(event)=>{changeMarkerPosition(it, event)}}
+                    onMoveEnd={(event) => {
+                        changeMarkerPosition(it, event)
+                    }}
                     icon={middlePointIcon}
-                    onContextMenu={()=>handleDeleteMarker(it)}
+                    onContextMenu={() => handleDeleteMarker(it)}
                 />)
         } else {
             MarkersArray.push(
                 <Marker
                     position={geoArray[it]}
                     draggable={true}
-                    onMoveEnd={(event)=>{changeMarkerPosition(it, event)}}
+                    onMoveEnd={(event) => {
+                        changeMarkerPosition(it, event)
+                    }}
                     onClick={handleMarkerClickAndActivateEditMode}
                     icon={endPointIcon}
-                    onContextMenu={()=>handleDeleteMarker(it)}
+                    onContextMenu={() => handleDeleteMarker(it)}
                 />)
         }
     }
-    for (let it=0;it<geoArray.length-1;it++){
-        const coords = [(geoArray[it][0]+geoArray[it+1][0])/2,(geoArray[it][1]+geoArray[it+1][1])/2];
-        SemimarkersArray.push(<Marker position={coords} draggable={true} onMoveEnd={(event)=>{addMarkerOnPosition(it, event)}}  icon={pseudoPointIcon}/>)
+    for (let it = 0; it < geoArray.length - 1; it++) {
+        const coords = [(geoArray[it][0] + geoArray[it + 1][0]) / 2, (geoArray[it][1] + geoArray[it + 1][1]) / 2];
+        SemimarkersArray.push(<Marker position={coords} draggable={true} onMoveEnd={(event) => {
+            addMarkerOnPosition(it, event)
+        }} icon={pseudoPointIcon}/>)
     }
-    const Poly = <Polyline positions={geoArray} color={'black'} weight={userPreferences.widthDrawLine} key={'template'} />
+    const Poly = <Polyline positions={geoArray} color={'black'} weight={userPreferences.widthDrawLine}
+                           key={'template'}/>
 
     return (
         <Fragment>
-            {MarkersArray}
-            {SemimarkersArray}
+            {!map.showEditMarkers && MarkersArray[0]}
+            {!map.showEditMarkers && MarkersArray[MarkersArray.length-1]}
+            {map.showEditMarkers && MarkersArray}
+            {map.showEditMarkers && SemimarkersArray}
             {Poly}
         </Fragment>
     )

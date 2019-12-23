@@ -8,9 +8,12 @@ import LayersPanelContainer from "../LayersPanel/LayersPanelContainer";
 import BridgesPanelContainer from "../BridgesPanel/BridgesPanelContainer";
 import DetailsObjectPanelContainer from "../DetailsObjectPanel/DetailsObjectPanelContainer";
 import RoadControlPanelContainer from "../RoadControlPanel/RoadControlPanelContainer";
-import {bridgesApi, dangersApi, roadsApi} from "../../api/api";
+import {bridgesApi, dangersApi, detailsApi, roadsApi} from "../../api/api";
 import DangerRoadsPanelContainer from "../DangerRoadsPanel/DangerRoadsPanelContainer";
 import OrderControlPanelContainer from "../OrderControlPanel/OrderControlPanelContainer";
+import TunnelsPanelContainer from "../TunnelsPanel/TunnelsPanelContainer";
+import PipesPanelContainer from "../PipesPanel/PipesPanelContainer";
+import PipelinesPanelContainer from "../PipelinesPanel/PipelinesPanelContainer";
 
 const MainControlPanel = (props) => {
     const [openedPanel, setOpenedPanel] = useState('initClosedPanel');
@@ -39,6 +42,27 @@ const MainControlPanel = (props) => {
                 case 'dangerRoad': {
                     setDetailedObjectFetching(true);
                     detailedObject = await dangersApi.getDangerRoadInfoById(obj.id);
+                    setDetailedObjectFetching(false);
+                    break;
+                }
+                case 'tunnel': {
+                    setDetailedObjectFetching(true);
+                    //TODO tunnel api
+                    detailedObject = await detailsApi.getTunnelInfoById(obj.id);
+                    setDetailedObjectFetching(false);
+                    break;
+                }
+                case 'pipe': {
+                    setDetailedObjectFetching(true);
+                    //TODO tunnel api
+                    detailedObject = await detailsApi.getPipeInfoById(obj.id);
+                    setDetailedObjectFetching(false);
+                    break;
+                }
+                case 'pipeline': {
+                    setDetailedObjectFetching(true);
+                    //TODO tunnel api
+                    detailedObject = await detailsApi.getPipelineInfoById(obj.id);
                     setDetailedObjectFetching(false);
                     break;
                 }
@@ -106,6 +130,10 @@ const MainControlPanel = (props) => {
                     {mainGroupWindow==='roads' && <RoadControlPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
                     {mainGroupWindow==='dangers' && <DangerRoadsPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
                     {mainGroupWindow==='order' && <OrderControlPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
+
+                    {mainGroupWindow==='tunnels' && <TunnelsPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
+                    {mainGroupWindow==='pipes' && <PipesPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
+                    {mainGroupWindow==='pipelines' && <PipelinesPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
                 </div>
             }
 

@@ -18,12 +18,12 @@ const DangerRoadsLayer = (props) => {
                 }
                 return (
                     <Fragment>
-                    <Polyline positions={points} key={position} color={userPreferences.dangerRoadsColor1} weight={userPreferences.dangerRoadsWidth}
+                    <Polyline positions={points} key={'DangerRoadsLayer'+position} color={userPreferences.dangerRoadsColor1} weight={userPreferences.dangerRoadsWidth}
                               onContextMenu={(event) => {
                               }}>
 
                     </Polyline>
-                    <Polyline positions={points} key={position} dashArray={[`${userPreferences.dangerRoadsStrokeLength}`,`${userPreferences.dangerRoadsStrokeLength}`]} dashOffset={`${userPreferences.dangerRoadsStrokeLength}`} color={userPreferences.dangerRoadsColor2}  weight={userPreferences.dangerRoadsWidth}
+                    <Polyline positions={points} key={'DangerRoadsLayerStroke'+position} dashArray={[`${userPreferences.dangerRoadsStrokeLength}`,`${userPreferences.dangerRoadsStrokeLength}`]} dashOffset={`${userPreferences.dangerRoadsStrokeLength}`} color={userPreferences.dangerRoadsColor2}  weight={userPreferences.dangerRoadsWidth}
                               onContextMenu={(event) => {
                               }}>
 
