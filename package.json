@@ -52,7 +52,7 @@
     "@turf/turf": "^5.1.6",
     "antd": "^3.25.3",
     "apexcharts": "^3.10.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "date-fns": "^2.6.0",
     "dotenv-webpack": "^1.7.0",
