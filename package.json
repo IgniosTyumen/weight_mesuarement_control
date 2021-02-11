@@ -51,7 +51,7 @@
     "@turf/buffer": "^5.1.5",
     "@turf/turf": "^5.1.6",
     "antd": "^3.25.3",
-    "apexcharts": "^3.10.0",
+    "apexcharts": "^3.24.0",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "date-fns": "^2.6.0",
