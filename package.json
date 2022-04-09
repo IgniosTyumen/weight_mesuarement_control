@@ -61,7 +61,7 @@
     "leaflet-draw": "^1.0.4",
     "leaflet.markercluster": "^1.4.1",
     "mini-css-extract-plugin": "^0.4.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "moment-range": "^4.0.2",
     "polyline": "^0.2.0",
     "react": "^16.11.0",
